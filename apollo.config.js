@@ -8,8 +8,8 @@ module.exports = {
       "./lib/**/*.ts",
     ],
     service: {
-      name: "token-discovery",
-      url: process.env.NEXT_PUBLIC_GRAPHQL_SERVER
+      name: "me-nft",
+      url: "https://kl5tlo5tj9.execute-api.us-east-1.amazonaws.com/dev/graphql"
     }
   }
 };

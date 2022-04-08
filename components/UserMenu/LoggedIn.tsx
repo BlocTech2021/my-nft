@@ -1,4 +1,4 @@
-import { User } from "../../helpers/types"
+import { User } from '../../lib/types'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'

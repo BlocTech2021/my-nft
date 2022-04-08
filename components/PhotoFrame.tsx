@@ -1,4 +1,4 @@
-import { Layer, Image, Rect, Group } from "react-konva";
+import { Image, Group } from "react-konva";
 import useImage from 'use-image';
 
 export enum Frame {
@@ -27,9 +27,7 @@ function PhotoFrame({ x, y, imgSrc, width, height, frame } : PhotoFrameProps) {
       break;
   }
 
-  if (frameSrc) {
-    [frameImage] = useImage(frameSrc);
-  }
+  [frameImage] = useImage(frameSrc?? '');
   const [image] = useImage(imgSrc);
 
   if (image) {

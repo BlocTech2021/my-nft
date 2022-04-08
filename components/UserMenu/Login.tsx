@@ -1,7 +1,10 @@
 import { ApolloError, gql, useMutation } from '@apollo/client'
 import { MailIcon } from '@heroicons/react/solid'
 import MetaMaskOnboarding from '@metamask/onboarding';
+import { useCookies } from 'react-cookie';
 import { getNonce, getNonceVariables } from '../../__generated__/getNonce';
+import { signatureLogin, signatureLoginVariables } from '../../__generated__/signatureLogin';
+import { LOGGEDIN_USER_COOKIE_NAME } from './constants';
 
 declare var window: any
 
@@ -18,9 +21,52 @@ export const GET_NONCE_MUTATION = gql`
   }
 `;
 
+export const SIGNATURE_LOGIN_MUTATION = gql`
+  mutation signatureLogin($address: String!, $signature: String!) {
+    signatureLogin(input: {
+      address: $address,
+      signature: $signature
+    }) {
+      ok
+      error
+      data {
+        accessToken
+        user {
+          address
+          username
+          enabled
+        }
+      }
+    }
+  }
+`;
+
 export default function Login() {
 
-  const onCompleted = async ({ getNonce }: getNonce) => {
+  const [_, setCookie] = useCookies([LOGGEDIN_USER_COOKIE_NAME]);
+
+  const onError = (error: ApolloError) => console.log(`error: ${error}`);
+
+  const onSignatureLoginCompleted = async ({ signatureLogin }: signatureLogin) => {
+    const { ok, error, data } = signatureLogin;
+    if (ok) {
+      const expires = new Date()
+      expires.setDate(expires.getDate() + 365);
+      const { accessToken, user } = data!;
+      setCookie(LOGGEDIN_USER_COOKIE_NAME, { accessToken, user }, {
+        path: '/',
+        expires,
+      })
+    } else {
+      console.log(`signatureLogin error: ${error}`);
+    }
+  }
+
+  const [signatureLogin, { loading: signatureLoginLoading }] = useMutation<signatureLogin, signatureLoginVariables>(SIGNATURE_LOGIN_MUTATION, 
+    { onCompleted: onSignatureLoginCompleted, onError})
+
+
+  const onGetNonceCompleted = async ({ getNonce }: getNonce) => {
     const { ok, error, messageToSign, address } = getNonce;
     if (ok) {
       console.log(`messageToSign: ${messageToSign}`);
@@ -29,15 +75,18 @@ export default function Login() {
         params: [address, messageToSign],
       });
 
-      console.log(`signature: ${signature}`)
+      signatureLogin({
+        variables: {
+          address: address!,
+          signature: signature
+        }
+      })
     }
     
   }
 
-  const onError = (error: ApolloError) => console.log(`error: ${error}`);
-
   const [getNonce, { loading: getNonceLoading }] = useMutation<getNonce, getNonceVariables>(GET_NONCE_MUTATION,
-    { onCompleted, onError })
+    { onCompleted: onGetNonceCompleted, onError })
   
   const onLogin = async () => {
     if (MetaMaskOnboarding.isMetaMaskInstalled()) {
@@ -62,11 +111,19 @@ export default function Login() {
   return (
     <button
         onClick={onLogin}
-        disabled={getNonceLoading}
+        disabled={getNonceLoading || signatureLoginLoading}
         type="button"
         className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
-    Login with Metamask
+    {
+      getNonceLoading && 'Get Nonce...'
+    }
+    {
+      signatureLoginLoading && 'Login...'
+    }
+    {
+      (!getNonceLoading && !signatureLoginLoading) && 'Login with Metamask'
+    }
     <MailIcon className="ml-2 -mr-1 h-5 w-5" aria-hidden="true" />
     </button>
   )

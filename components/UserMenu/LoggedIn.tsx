@@ -3,25 +3,34 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
+import { shortenAddress } from '../../helpers/utils'
+import { useCookies } from 'react-cookie'
+import { LOGGEDIN_USER_COOKIE_NAME } from './constants'
 
 type LoggedInProps = {
   user: User
 }
 
-const items = [
-  { name: 'Save and schedule', href: '#' },
-  { name: 'Save and publish', href: '#' },
-  { name: 'Export PDF', href: '#' },
-]
+export default function LoggedIn({ user }: LoggedInProps) {
+  const { address } = user;
 
-export default function LoggedIn({ user }) {
+  const [cookie, _, removeCookie] = useCookies([LOGGEDIN_USER_COOKIE_NAME]);
+
+  const items = [
+    { name: 'Logout', href: '#', onClick: (e: any) => {
+        e.preventDefault();
+        removeCookie(LOGGEDIN_USER_COOKIE_NAME);
+      }
+    },
+  ]
+
   return (
     <span className="relative z-0 inline-flex shadow-sm rounded-md">
       <button
         type="button"
         className="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
       >
-        Save changes
+        { shortenAddress(address) }
       </button>
       <Menu as="span" className="-ml-px relative block">
         <Menu.Button className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
@@ -48,6 +57,7 @@ export default function LoggedIn({ user }) {
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm'
                       )}
+                      onClick={item.onClick}
                     >
                       {item.name}
                     </a>

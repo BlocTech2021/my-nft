@@ -1,17 +1,18 @@
 import { useCookies } from 'react-cookie'
-import { User } from '../../helpers/types'
+import { LoggedinUser } from '../../lib/types'
+import { LOGGEDIN_USER_COOKIE_NAME } from './constants';
 import LoggedIn from './LoggedIn';
 import Login from './Login';
 
 function UserMenu() {
-  const [cookie] = useCookies(['user']);
+  const [cookie] = useCookies([LOGGEDIN_USER_COOKIE_NAME]);
 
-  const user: User | undefined = cookie['user'];
+  const loggedinUser: LoggedinUser | undefined = cookie[LOGGEDIN_USER_COOKIE_NAME];
 
   console.log(`cookie: ${JSON.stringify(cookie)}`);
 
-  if (user) {
-    return <LoggedIn user={user} />
+  if (loggedinUser) {
+    return <LoggedIn user={loggedinUser.user} />
   } else {
     return <Login />
   }

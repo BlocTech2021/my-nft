@@ -1,18 +1,15 @@
 import { useCookies } from 'react-cookie'
+import { useAuth } from '../../lib/contexts/auth';
 import { LoggedinUser } from '../../lib/types'
 import { LOGGEDIN_USER_COOKIE_NAME } from './constants';
 import LoggedIn from './LoggedIn';
 import Login from './Login';
 
 function UserMenu() {
-  const [cookie] = useCookies([LOGGEDIN_USER_COOKIE_NAME]);
+ const { isLoggedIn, user } = useAuth()
 
-  const loggedinUser: LoggedinUser | undefined = cookie[LOGGEDIN_USER_COOKIE_NAME];
-
-  console.log(`cookie: ${JSON.stringify(cookie)}`);
-
-  if (loggedinUser) {
-    return <LoggedIn user={loggedinUser.user} />
+  if (isLoggedIn) {
+    return <LoggedIn user={user!.user} />
   } else {
     return <Login />
   }

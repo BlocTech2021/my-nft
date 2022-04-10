@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { gql, useQuery } from "@apollo/client";
 import { getMainRoom, getMainRoom_getMainRoom_data } from "../__generated__/getMainRoom";
 import { Room } from "../lib/types";
+import Loading from "../components/common/Loading/Loading";
 
 const RoomCanva = dynamic(() => import("../components/Room/RoomCanva"), {
   ssr: false,
@@ -38,7 +39,7 @@ const MainRoomPage: NextPage = () => {
   const { data, loading, error } = useQuery<getMainRoom>(GET_MAIN_ROOM_QUERY, { fetchPolicy: 'no-cache' });
 
   if (loading) {
-    return (<RequireAuth><h1>Loading</h1></RequireAuth>);
+    return (<RequireAuth><Loading /></RequireAuth>);
   }
 
   if (error) {

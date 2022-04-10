@@ -1,10 +1,7 @@
-import { CalendarIcon, ChevronRightIcon, SpeakerphoneIcon, TerminalIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon, SpeakerphoneIcon, TerminalIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import type { NextPage } from 'next'
-import { useCookies } from 'react-cookie'
-import { LOGGEDIN_USER_COOKIE_NAME } from '../components/UserMenu/constants'
 import { RequireAuth } from '../lib/contexts/RequireAuth'
-import { LoggedinUser } from '../lib/types'
 import styles from '../styles/Home.module.css'
 
 const items = [
@@ -25,11 +22,6 @@ const items = [
 ]
 
 const Profile: NextPage = () => {
-  const [cookie] = useCookies([LOGGEDIN_USER_COOKIE_NAME]);
-
-  const user: LoggedinUser | undefined = cookie[LOGGEDIN_USER_COOKIE_NAME];
-  console.log(`isLoggedIn in profile: ${!!user}`);
-
   return (
     <RequireAuth>
       <div className={styles.container}>

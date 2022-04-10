@@ -9,3 +9,11 @@ export type User = {
   username: string;
   enabled: boolean;
 }
+
+export type Room = {
+  id: string;
+  isMain: boolean;
+  backgroundColor?: string;
+  backgroundImage?: string;
+  userAddress: string;
+}

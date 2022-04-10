@@ -6,6 +6,8 @@ import classNames from 'classnames'
 import { shortenAddress } from '../../helpers/utils'
 import { useCookies } from 'react-cookie'
 import { LOGGEDIN_USER_COOKIE_NAME } from './constants'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 type LoggedInProps = {
   user: User
@@ -14,12 +16,17 @@ type LoggedInProps = {
 export default function LoggedIn({ user }: LoggedInProps) {
   const { address } = user;
 
-  const [cookie, _, removeCookie] = useCookies([LOGGEDIN_USER_COOKIE_NAME]);
+  const [_cookie, _, removeCookie] = useCookies([LOGGEDIN_USER_COOKIE_NAME]);
+
+  const router = useRouter();
 
   const items = [
+    { name: 'My Profile', href: '/my-profile'
+    },
     { name: 'Logout', href: '#', onClick: (e: any) => {
         e.preventDefault();
         removeCookie(LOGGEDIN_USER_COOKIE_NAME);
+        router.push('/');
       }
     },
   ]
@@ -51,16 +58,18 @@ export default function LoggedIn({ user }: LoggedInProps) {
               {items.map((item) => (
                 <Menu.Item key={item.name}>
                   {({ active }) => (
-                    <a
-                      href={item.href}
-                      className={classNames(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm'
-                      )}
-                      onClick={item.onClick}
-                    >
-                      {item.name}
-                    </a>
+                    <Link href={item.href}>
+                      <a
+                        href={item.href}
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm'
+                        )}
+                        onClick={item.onClick}
+                      >
+                        {item.name}
+                      </a>
+                    </Link>
                   )}
                 </Menu.Item>
               ))}

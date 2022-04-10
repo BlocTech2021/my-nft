@@ -1,7 +1,4 @@
-import { useCookies } from 'react-cookie'
 import { useAuth } from '../../lib/contexts/auth';
-import { LoggedinUser } from '../../lib/types'
-import { LOGGEDIN_USER_COOKIE_NAME } from './constants';
 import LoggedIn from './LoggedIn';
 import Login from './Login';
 

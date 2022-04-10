@@ -10,8 +10,6 @@ export type AuthInfo = {
 
 const AuthContext = createContext<AuthInfo>({isLoggedIn: false, user: undefined});
 
-
-
 export const AuthProvider = ({ children }: { children: any }) => {
   const [cookie] = useCookies([LOGGEDIN_USER_COOKIE_NAME]);
 

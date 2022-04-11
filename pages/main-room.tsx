@@ -6,7 +6,7 @@ import { getMainRoom, getMainRoom_getMainRoom_data } from "../__generated__/getM
 import { Room } from "../lib/types";
 import Loading from "../components/common/Loading/Loading";
 
-const RoomCanva = dynamic(() => import("../components/Room/RoomCanva"), {
+const MainRoom = dynamic(() => import("../components/Room/MainRoom"), {
   ssr: false,
 });
 
@@ -34,6 +34,8 @@ export function transformMainRoom(roomData: getMainRoom_getMainRoom_data): Room 
   }
 }
 
+const colors = ['#2196F3', '#009688', '#9C27B0', '#FFEB3B', '#afbbc9', '#4CAF50', '#2d3748', '#f56565', '#ed64a6']
+
 const MainRoomPage: NextPage = () => {
 
   const { data, loading, error } = useQuery<getMainRoom>(GET_MAIN_ROOM_QUERY, { fetchPolicy: 'no-cache' });
@@ -50,9 +52,10 @@ const MainRoomPage: NextPage = () => {
     <RequireAuth>
       {
         data && data.getMainRoom.ok &&
-        <RoomCanva room={transformMainRoom(data.getMainRoom.data!)}>
-        </RoomCanva>  
+        <MainRoom room={transformMainRoom(data.getMainRoom.data!)} />
       }
+      
+        
     </RequireAuth>
   )
 }

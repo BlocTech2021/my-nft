@@ -41,7 +41,7 @@ const MainRoomPage: NextPage = () => {
   const { data, loading, error } = useQuery<getMainRoom>(GET_MAIN_ROOM_QUERY, { fetchPolicy: 'no-cache' });
 
   if (loading) {
-    return (<RequireAuth><Loading /></RequireAuth>);
+    return (<RequireAuth><Loading fullScreen={true} /></RequireAuth>);
   }
 
   if (error) {

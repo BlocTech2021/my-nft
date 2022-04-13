@@ -17,3 +17,16 @@ export type Room = {
   backgroundImage?: string;
   userAddress: string;
 }
+
+export type Asset = {
+  userAddress: string;
+  id: string;
+  openseaId: string;
+  openseaName?: string;
+  openseaTokenId: string;
+  openseaAssetContract: string;
+  openseaImageUrl: string;
+  openseaImagePreviewUrl: string;
+  openseaImageOriginalUrl: string;
+  openseaImageThumbnailUrl: string;
+}

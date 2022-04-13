@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { motion } from "framer-motion";
 
 const ballStyle = {
@@ -23,9 +24,13 @@ const bounceTransition = {
   }
 };
 
-function Loading() {
+export type LoadingProps = {
+  fullScreen?: boolean
+}
+
+function Loading({ fullScreen } : LoadingProps) {
   return (
-    <div className="h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-b from-cyan-500 to-blue-500">
+    <div className={classNames('flex flex-col justify-center py-12 sm:px-6 lg:px-8', fullScreen ? 'h-screen bg-gradient-to-b from-cyan-500 to-blue-500' : '')}>
       <div className="sm:mx-auto sm:w-full sm:max-w-lg">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 opacity-50">
           {/* We've used 3xl here, but feel free to try other max-widths based on your needs */}

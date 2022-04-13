@@ -7,6 +7,27 @@
 // GraphQL query operation: getMainRoom
 // ====================================================
 
+export interface getMainRoom_getMainRoom_data_assets {
+  __typename: "Asset";
+  id: string;
+  roomId: string;
+  userAddress: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  strokeWidth: number;
+  strokeColor: string | null;
+  spaceFillColor: string | null;
+  spaceWidth: number | null;
+  shadow: number;
+  openseaId: string;
+  openseaAssetContract: string;
+  openseaTokenId: string;
+  openseaImageUrl: string;
+  openseaImageThumbnailUrl: string;
+}
+
 export interface getMainRoom_getMainRoom_data {
   __typename: "Room";
   id: string;
@@ -14,6 +35,7 @@ export interface getMainRoom_getMainRoom_data {
   backgroundColor: string | null;
   backgroundImage: string | null;
   userAddress: string;
+  assets: getMainRoom_getMainRoom_data_assets[];
 }
 
 export interface getMainRoom_getMainRoom {

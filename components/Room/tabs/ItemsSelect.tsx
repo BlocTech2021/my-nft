@@ -40,7 +40,7 @@ export function ItemsSelect() {
         <div className="grid grid-cols-3 gap-x-4 max-h-80 overflow-y-scroll">
           {
             data?.getOpenseaAssets.data?.assets.map(asset => (
-              <div className="group relative text-sm">
+              <div key={asset.openseaId} className="group relative text-sm">
                 <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75 mb-1">
                   <img src={asset.openseaImageThumbnailUrl} className="object-center object-cover" />  
                 </div>

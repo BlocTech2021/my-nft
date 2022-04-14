@@ -49,47 +49,42 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit } : Phot
 
   return (
     <>
-      <Group ref={shapeRef} width={width} height={height} x={x} y={y} draggable onDragEnd={(e) => {
-        console.log(`x: ${e.target.x()}`);
-        console.log(`y: ${e.target.y()}`);
-      }}
+      <Group ref={shapeRef} width={width} height={height} x={x} y={y} draggable 
+        onDragEnd={(e) => {
+          onAssetEdit({
+            id: asset.id,
+            x: e.target.x(),
+            y: e.target.y()
+          })
+        }}
 
-      onClick={(e) => {
-        selectAssetWithId(asset.id)
-        e.cancelBubble = true;
-      }}
+        onClick={(e) => {
+          selectAssetWithId(asset.id)
+          e.cancelBubble = true;
+        }}
 
-      onTransformEnd={(e) => {
-        // transformer is changing scale of the node
-        // and NOT its width or height
-        // but in the store we have only width and height
-        // to match the data better we will reset scale on transform end
-        const node = shapeRef.current;
-        const scaleX = node.scaleX();
-        const scaleY = node.scaleY();
+        onTransformEnd={(e) => {
+          // transformer is changing scale of the node
+          // and NOT its width or height
+          // but in the store we have only width and height
+          // to match the data better we will reset scale on transform end
+          const node = shapeRef.current;
+          const scaleX = node.scaleX();
+          const scaleY = node.scaleY();
 
-        // we will reset it back
-        node.scaleX(1);
-        node.scaleY(1);
+          // we will reset it back
+          node.scaleX(1);
+          node.scaleY(1);
 
-        onAssetEdit({
-          id: asset.id,
-          x: node.x(),
-          y: node.y(),
-          // set minimal value
-          width: Math.max(5, node.width() * scaleX),
-          height: Math.max(node.height() * scaleY),
-        })
-
-        // onChange({
-        //   ...shapeProps,
-        //   x: node.x(),
-        //   y: node.y(),
-        //   // set minimal value
-        //   width: Math.max(5, node.width() * scaleX),
-        //   height: Math.max(node.height() * scaleY),
-        // });
-      }}>
+          onAssetEdit({
+            id: asset.id,
+            x: node.x(),
+            y: node.y(),
+            // set minimal value
+            width: Math.max(5, node.width() * scaleX),
+            height: Math.max(node.height() * scaleY),
+          })
+        }}>
         <Rect x={0} y={0} width={width} height={height} strokeWidth={strokeWidth} stroke={strokeColor}
           shadowBlur={shadow} shadowEnabled={shadow > 0} fill={spaceFillColor} />
         <Image image={image}

@@ -40,3 +40,11 @@ export type Asset = {
   openseaImageUrl: string;
   openseaImageThumbnailUrl: string;
 }
+
+export type AssetEdit = {
+  id: string;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+}

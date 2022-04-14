@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useState } from "react";
 import { allColors } from "../../lib/colors/color";
-import { Asset, Room } from "../../lib/types";
+import { Asset, AssetEdit, Room } from "../../lib/types";
 import EditBox from "./EditBox";
 import RoomCanva from "./RoomCanva";
 
@@ -30,13 +30,23 @@ function MainRoom(props: MainRoomProps) {
     setRoom({ ...otherAttrs, assets: [...assets, asset] });
   }
 
+  const onAssetEdit = (assetEdit: AssetEdit) => {
+    const { assets, ...otherAttrs } = room;
+    const assetIndex = assets.findIndex(asset => asset.id === assetEdit.id);
+    if (assetIndex < 0) {
+      return;
+    }
+    setRoom({ ...otherAttrs, assets: [...assets.slice(0, assetIndex), {...assets[assetIndex], ...assetEdit}, ...assets.slice(assetIndex + 1, assets.length)] })
+  }
+
   return (
     <>
-      <RoomCanva room={room} />
+      <RoomCanva room={room} onAssetEdit={onAssetEdit} />
       
       <EditBox room={room} 
         onBackgroundColorChanged={onBackgroundColorChanged}
-        onAssetCreated={onAssetCreated} />
+        onAssetCreated={onAssetCreated}
+         />
     </>
   )
 }

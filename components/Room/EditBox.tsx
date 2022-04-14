@@ -1,16 +1,17 @@
 import classNames from "classnames"
 import { useState } from "react"
 import { allColors } from "../../lib/colors/color"
-import { Room } from "../../lib/types"
+import { Asset, Room } from "../../lib/types"
 import { ItemsSelect } from "./tabs/ItemsSelect"
 import { RoomEdit } from "./tabs/RoomEdit"
 
 export type EditBoxProps = {
   room: Room,
   onBackgroundColorChanged: (colorIndex: number) => any
+  onAssetCreated: (asset: Asset) => any
 }
 
-export default function EditBox({ room, onBackgroundColorChanged }: EditBoxProps) {
+export default function EditBox({ room, onBackgroundColorChanged, onAssetCreated }: EditBoxProps) {
 
   const tabs = [
     { name: 'Room' },
@@ -51,7 +52,7 @@ export default function EditBox({ room, onBackgroundColorChanged }: EditBoxProps
               </div>
               
               { currentTabName === 'Room' && <RoomEdit room={room} onBackgroundColorChanged={onBackgroundColorChanged} /> }
-              { currentTabName === 'Items' && <ItemsSelect /> }
+              { currentTabName === 'Items' && <ItemsSelect roomId={room.id} onAssetCreated={onAssetCreated} /> }
             </div>
           </div>
         </div>

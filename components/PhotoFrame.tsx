@@ -93,7 +93,7 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit } : Phot
         {
           photoFrameUrl &&  
             <Image image={frameImage} width={width} height={height}
-              x={0} y={0}  />
+              x={0} y={0} alt="Frame" />
         }
 
         

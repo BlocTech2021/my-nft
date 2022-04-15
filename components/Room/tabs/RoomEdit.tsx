@@ -17,7 +17,7 @@ export function RoomEdit({ room, onBackgroundColorChanged } : RoomEditProps) {
           <div className="rounded-md shadow-xs px-0 py-0 flex">
             {
               allColors.map((color, colorIndex) => (
-                <div className="px-2">
+                <div key={color.name} className="px-2">
                   <div role="checkbox" className="w-8 h-8 inline-flex rounded-full cursor-pointer border-4 border-white focus:outline-none focus:shadow-outline"
                       style={{ background: color.startRgb, boxShadow: room.backgroundColor === color.name ? '0 0 0 2px rgba(0, 0, 0, 0.2)' : undefined }}
                       onClick={() => onBackgroundColorChanged(colorIndex)}>

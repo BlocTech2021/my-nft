@@ -7,12 +7,14 @@ import { CookiesProvider } from "react-cookie"
 import { ApolloProvider } from '@apollo/react-hooks';
 import { apolloClient } from '../lib/apolloClient';
 import { AuthProvider } from '../lib/contexts/auth';
+import { Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={apolloClient}>
       <CookiesProvider>
         <AuthProvider>
+          <Toaster />
           <div className='relative'>
             <Head>
               <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />

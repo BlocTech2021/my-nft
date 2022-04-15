@@ -1,7 +1,9 @@
 import { gql, useMutation } from "@apollo/client";
 import classNames from "classnames";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { allColors } from "../../lib/colors/color";
+import { toastError, toastSuccess } from "../common/toastUtils";
 import { Asset, AssetEdit, Room, RoomWithAssetsEdit } from "../../lib/types";
 import { updateRoom, updateRoomVariables } from "../../__generated__/updateRoom";
 import EditBox from "./EditBox";
@@ -42,11 +44,16 @@ function MainRoom(props: MainRoomProps) {
 
   const [roomWithAssetsEdit, setRoomWithAssetsEdit] = useState<RoomWithAssetsEdit>(initialRoomWithAssetsEdit())
 
+  const [selectedAssetId, selectAssetWithId] = useState<string | undefined>(undefined);
+
+  // For mutation
   const onUpdateRoomCompleted = async ({ updateRoom }: updateRoom) => {
     if(updateRoom.ok) {
       console.log(`onUpdateRoomCompleted ok`)
       setRoomWithAssetsEdit(initialRoomWithAssetsEdit())
+      toastSuccess("Changes successfully saved!");
     } else {
+      toastError(`Error: ${updateRoom.error}`);
       console.log(`Error: ${updateRoom.error}`);
     }
   }
@@ -96,11 +103,13 @@ function MainRoom(props: MainRoomProps) {
 
   return (
     <>
-      <RoomCanva room={room} onAssetEdit={onAssetEdit} />
+      <RoomCanva room={room} onAssetEdit={onAssetEdit}
+        selectedAssetId={selectedAssetId} selectAssetWithId={selectAssetWithId} />
       
       <EditBox room={room} 
         onBackgroundColorChanged={onBackgroundColorChanged}
         onAssetCreated={onAssetCreated}
+        selectedAsset={room.assets.find(asset => asset.id === selectedAssetId)}
          />
       
       <div className='fixed top-5 right-52'>

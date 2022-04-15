@@ -11,7 +11,7 @@ export enum Frame {
 export type PhotoFrameProps = {
   asset: Asset;
   isSelected: boolean;
-  selectAssetWithId: Dispatch<SetStateAction<string | null>>;
+  selectAssetWithId: Dispatch<SetStateAction<string | undefined>>;
   onAssetEdit: (assetEdit: AssetEdit) => any
 }
 

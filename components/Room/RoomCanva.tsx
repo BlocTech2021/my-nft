@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Stage, Layer, Circle, Image, Rect } from "react-konva";
 import { Color, getColorByName } from "../../lib/colors/color";
 import { AssetEdit, Room } from "../../lib/types";
@@ -6,12 +6,12 @@ import PhotoFrame, { Frame } from "../PhotoFrame";
 
 export type RoomCanvaProps = {
   room: Room,
-  onAssetEdit: (assetEdit: AssetEdit) => any
+  onAssetEdit: (assetEdit: AssetEdit) => any,
+  selectedAssetId?: string,
+  selectAssetWithId: Dispatch<SetStateAction<string | undefined>>
 }
 
-function RoomCanva({ room, onAssetEdit }: RoomCanvaProps) {
-
-  const [selectedAssetId, selectAssetWithId] = useState<string | null>(null);
+function RoomCanva({ room, onAssetEdit, selectedAssetId, selectAssetWithId }: RoomCanvaProps) {
 
   function renderBackground(room: Room) {
     if (room.backgroundColor) {
@@ -34,7 +34,7 @@ function RoomCanva({ room, onAssetEdit }: RoomCanvaProps) {
   }
 
   return (
-    <Stage width={window.innerWidth} height={window.innerHeight} onClick={() => { selectAssetWithId(null) }}>
+    <Stage width={window.innerWidth} height={window.innerHeight} onClick={() => { selectAssetWithId(undefined) }}>
       <Layer>
         { renderBackground(room) }
       </Layer>

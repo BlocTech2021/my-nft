@@ -8,7 +8,8 @@ import { RoomEdit } from "./tabs/RoomEdit"
 export type EditBoxProps = {
   room: Room,
   onBackgroundColorChanged: (colorIndex: number) => any
-  onAssetCreated: (asset: Asset) => any
+  onAssetCreated: (asset: Asset) => any,
+  selectedAsset?: Asset
 }
 
 export default function EditBox({ room, onBackgroundColorChanged, onAssetCreated }: EditBoxProps) {

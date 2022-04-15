@@ -41,6 +41,16 @@ export type Asset = {
   openseaImageThumbnailUrl: string;
 }
 
+export type RoomWithAssetsEdit = {
+  roomEdit?: RoomEdit;
+  assetsEdit: Map<string, AssetEdit>; 
+}
+
+export type RoomEdit = {
+  backgroundColor?: string;
+  backgroundImage?: string;
+}
+
 export type AssetEdit = {
   id: string;
   x?: number;

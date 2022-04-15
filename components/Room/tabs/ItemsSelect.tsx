@@ -120,7 +120,7 @@ export function ItemsSelect({ roomId, onAssetCreated } : ItemsSelectProps) {
             data?.getOpenseaAssets.data?.assets.map(asset => (
               <div key={asset.openseaId} className="group relative text-sm">
                 <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75 mb-1">
-                  <Image src={asset.openseaImageThumbnailUrl} 
+                  <img src={asset.openseaImageThumbnailUrl}
                     className="object-center object-cover"
                     onLoad={(e) => {
                       { /* keep image sizes so at server it can keep image ratio */ }

@@ -57,4 +57,7 @@ export type AssetEdit = {
   y?: number;
   width?: number;
   height?: number;
+  shadow?: number;
+  spaceFillColor?: string,
+  spaceWidth?: number,
 }

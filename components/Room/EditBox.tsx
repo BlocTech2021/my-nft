@@ -1,7 +1,8 @@
 import classNames from "classnames"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { allColors } from "../../lib/colors/color"
-import { Asset, Room } from "../../lib/types"
+import { Asset, AssetEdit, Room } from "../../lib/types"
+import { AssetEditTab } from "./tabs/AssetEdit"
 import { ItemsSelect } from "./tabs/ItemsSelect"
 import { RoomEdit } from "./tabs/RoomEdit"
 
@@ -9,18 +10,25 @@ export type EditBoxProps = {
   room: Room,
   onBackgroundColorChanged: (colorIndex: number) => any
   onAssetCreated: (asset: Asset) => any,
-  selectedAsset?: Asset
+  selectedAsset?: Asset,
+  onAssetEdit: (assetEdit: AssetEdit) => any
 }
 
-export default function EditBox({ room, onBackgroundColorChanged, onAssetCreated }: EditBoxProps) {
+export default function EditBox({ room, onBackgroundColorChanged, onAssetCreated, selectedAsset, onAssetEdit }: EditBoxProps) {
 
   const tabs = [
     { name: 'Room' },
-    { name: 'Asset' },
+    { name: 'Asset', disabled: !selectedAsset },
     { name: 'Items' },
   ]
 
   const [currentTabName, setCurrentTabName] = useState('Room');
+
+  useEffect(() => {
+    if(!selectedAsset && currentTabName === 'Asset') {
+      setCurrentTabName('Room');
+    }
+  })
 
   return (
     <div className="absolute top-20 right-10 flex flex-col justify-center py-0 px-0 text-xs">
@@ -34,6 +42,7 @@ export default function EditBox({ room, onBackgroundColorChanged, onAssetCreated
                       <a
                         key={tab.name}
                         className={classNames(
+                          tab.disabled ? 'hidden' : '',
                           tab.name === currentTabName
                             ? 'border-indigo-500 text-indigo-600'
                             : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
@@ -53,6 +62,7 @@ export default function EditBox({ room, onBackgroundColorChanged, onAssetCreated
               </div>
               
               { currentTabName === 'Room' && <RoomEdit room={room} onBackgroundColorChanged={onBackgroundColorChanged} /> }
+              { currentTabName === 'Asset' && selectedAsset && <AssetEditTab asset={selectedAsset} onAssetEdit={onAssetEdit} /> }
               { currentTabName === 'Items' && <ItemsSelect roomId={room.id} onAssetCreated={onAssetCreated} /> }
             </div>
           </div>

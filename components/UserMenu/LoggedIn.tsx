@@ -21,7 +21,7 @@ export default function LoggedIn({ user }: LoggedInProps) {
   const router = useRouter();
 
   const items = [
-    { name: 'My Profile', href: '/my-profile'
+    { name: 'My Room', href: '/main-room'
     },
     { name: 'Logout', href: '#', onClick: (e: any) => {
         e.preventDefault();

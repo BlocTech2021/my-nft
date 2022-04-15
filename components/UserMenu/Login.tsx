@@ -1,6 +1,7 @@
 import { ApolloError, gql, useMutation } from '@apollo/client'
 import { MailIcon } from '@heroicons/react/solid'
 import MetaMaskOnboarding from '@metamask/onboarding';
+import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
 import { getNonce, getNonceVariables } from '../../__generated__/getNonce';
 import { signatureLogin, signatureLoginVariables } from '../../__generated__/signatureLogin';
@@ -44,6 +45,7 @@ export const SIGNATURE_LOGIN_MUTATION = gql`
 export default function Login() {
 
   const [_, setCookie] = useCookies([LOGGEDIN_USER_COOKIE_NAME]);
+  const router = useRouter();
 
   const onError = (error: ApolloError) => console.log(`error: ${error}`);
 
@@ -57,6 +59,8 @@ export default function Login() {
         path: '/',
         expires,
       })
+
+      router.push('/main-room');
     } else {
       console.log(`signatureLogin error: ${error}`);
     }

@@ -6,6 +6,11 @@ export type Color = {
 
 export const allColors: Color[] = [
   {
+    name: 'white',
+    startRgb: '#ffffff',
+    stopRgb: '#d7e1ec',
+  },
+  {
     name: 'megaman',
     startRgb: '#38bdf8',
     stopRgb: '#3b82f6',

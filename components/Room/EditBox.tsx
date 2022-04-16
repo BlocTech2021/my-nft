@@ -14,6 +14,8 @@ export type EditBoxProps = {
   onRoomEdit: (roomEdit: RoomEdit) => any
 }
 
+let previousSelectedAsset: any = undefined;
+
 export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEdit, onRoomEdit }: EditBoxProps) {
 
   const tabs = [
@@ -22,12 +24,16 @@ export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEd
     { name: 'Items' },
   ]
 
-  const [currentTabName, setCurrentTabName] = useState('Room');
+  const [currentTabName, setCurrentTabName] = useState(selectedAsset ? 'Asset' : 'Room');
 
   useEffect(() => {
     if(!selectedAsset && currentTabName === 'Asset') {
       setCurrentTabName('Room');
     }
+    if(selectedAsset && selectedAsset !== previousSelectedAsset) {
+      setCurrentTabName('Asset');
+      previousSelectedAsset = selectedAsset;
+    } 
   })
 
   return (

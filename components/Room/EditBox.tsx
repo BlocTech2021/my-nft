@@ -1,20 +1,20 @@
 import classNames from "classnames"
 import { useEffect, useState } from "react"
 import { allColors } from "../../lib/colors/color"
-import { Asset, AssetEdit, Room } from "../../lib/types"
+import { Asset, AssetEdit, Room, RoomEdit } from "../../lib/types"
 import { AssetEditTab } from "./tabs/AssetEdit"
 import { ItemsSelect } from "./tabs/ItemsSelect"
-import { RoomEdit } from "./tabs/RoomEdit"
+import { RoomEditTab } from "./tabs/RoomEdit"
 
 export type EditBoxProps = {
   room: Room,
-  onBackgroundColorChanged: (colorIndex: number) => any
   onAssetCreated: (asset: Asset) => any,
   selectedAsset?: Asset,
   onAssetEdit: (assetEdit: AssetEdit) => any
+  onRoomEdit: (roomEdit: RoomEdit) => any
 }
 
-export default function EditBox({ room, onBackgroundColorChanged, onAssetCreated, selectedAsset, onAssetEdit }: EditBoxProps) {
+export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEdit, onRoomEdit }: EditBoxProps) {
 
   const tabs = [
     { name: 'Room' },
@@ -61,7 +61,7 @@ export default function EditBox({ room, onBackgroundColorChanged, onAssetCreated
                 </div>
               </div>
               
-              { currentTabName === 'Room' && <RoomEdit room={room} onBackgroundColorChanged={onBackgroundColorChanged} /> }
+              { currentTabName === 'Room' && <RoomEditTab room={room} onRoomEdit={onRoomEdit} /> }
               { currentTabName === 'Asset' && selectedAsset && <AssetEditTab asset={selectedAsset} onAssetEdit={onAssetEdit} /> }
               { currentTabName === 'Items' && <ItemsSelect roomId={room.id} onAssetCreated={onAssetCreated} /> }
             </div>

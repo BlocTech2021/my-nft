@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { Stage, Layer, Circle, Image, Rect } from "react-konva";
+import useImage from "use-image";
 import { Color, getColorByName } from "../../lib/colors/color";
 import { AssetEdit, Room } from "../../lib/types";
 import PhotoFrame, { Frame } from "../PhotoFrame";
@@ -13,8 +14,14 @@ export type RoomCanvaProps = {
 
 function RoomCanva({ room, onAssetEdit, selectedAssetId, selectAssetWithId }: RoomCanvaProps) {
 
+  const [image] = useImage(room.backgroundImage?? '');
+
   function renderBackground(room: Room) {
-    if (room.backgroundColor) {
+    if (room.backgroundImage) {
+      return (
+        <Image image={image} width={window.innerWidth} height={window.innerHeight} listening={false} />
+      )
+    } else if (room.backgroundColor) {
       const color = getColorByName(room.backgroundColor);
       return (
         <Rect width={window.innerWidth} height={window.innerHeight} listening={false} 
@@ -27,9 +34,7 @@ function RoomCanva({ room, onAssetEdit, selectedAssetId, selectAssetWithId }: Ro
               color.stopRgb,
             ]} />
       )
-    } else {
-        <Rect width={window.innerWidth} height={window.innerHeight} listening={false} />
-    }
+    } 
 
   }
 

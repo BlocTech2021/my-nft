@@ -4,7 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { allColors } from "../../lib/colors/color";
 import { toastError, toastSuccess } from "../common/toastUtils";
-import { Asset, AssetEdit, Room, RoomWithAssetsEdit } from "../../lib/types";
+import { Asset, AssetEdit, Room, RoomEdit, RoomWithAssetsEdit } from "../../lib/types";
 import { updateRoom, updateRoomVariables } from "../../__generated__/updateRoom";
 import EditBox from "./EditBox";
 import RoomCanva from "./RoomCanva";
@@ -65,14 +65,6 @@ function MainRoom(props: MainRoomProps) {
   const [updateRoom, { loading }] = useMutation<updateRoom, updateRoomVariables>(UPDATE_ROOM_MUTATION, 
     { onCompleted: onUpdateRoomCompleted, onError: onUpdateRoomError })
 
-  const onBackgroundColorChanged = (colorIndex: number) => {
-    const roomChanges = { backgroundColor: allColors[colorIndex].name, backgroundImage: '' }
-    setRoom({ ...room, ...roomChanges });
-    
-    const { roomEdit, assetsEdit } = roomWithAssetsEdit;
-    setRoomWithAssetsEdit({assetsEdit, roomEdit: { ...roomEdit, ...roomChanges }});
-  }
-
   const onAssetCreated = (asset: Asset) => {
     const { assets, ...otherAttrs } = room;
     setRoom({ ...otherAttrs, assets: [...assets, asset] });
@@ -91,6 +83,14 @@ function MainRoom(props: MainRoomProps) {
       assetsEdit: assetsEdit.set(assetEdit.id, {...assetsEdit.get(assetEdit.id), ...assetEdit}) }))
   }
 
+
+  const onRoomEdit = (roomEdit: RoomEdit) => {
+    setRoom({ ...room, ...roomEdit });
+
+    const { roomEdit: existingRoomEdit, assetsEdit } = roomWithAssetsEdit;
+    setRoomWithAssetsEdit({assetsEdit, roomEdit: { ...existingRoomEdit, ...roomEdit }});
+  }
+
   const onSaveChanges = () => {
     updateRoom({
       variables: {
@@ -107,7 +107,7 @@ function MainRoom(props: MainRoomProps) {
         selectedAssetId={selectedAssetId} selectAssetWithId={selectAssetWithId} />
       
       <EditBox room={room} 
-        onBackgroundColorChanged={onBackgroundColorChanged}
+        onRoomEdit={onRoomEdit}
         onAssetCreated={onAssetCreated}
         selectedAsset={room.assets.find(asset => asset.id === selectedAssetId)}
         onAssetEdit={onAssetEdit}

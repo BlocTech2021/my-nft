@@ -83,6 +83,25 @@ function MainRoom(props: MainRoomProps) {
       assetsEdit: assetsEdit.set(assetEdit.id, {...assetsEdit.get(assetEdit.id), ...assetEdit}) }))
   }
 
+  const onAssetRemoved = (asset: Asset) => {
+    const { assets, ...otherAttrs } = room;
+    const assetIndex = assets.findIndex(asset => asset.id === asset.id);
+    if (assetIndex < 0) {
+      return;
+    }
+    if (selectedAssetId === asset.id) {
+      selectAssetWithId(undefined);
+    }
+    
+    setRoom({ ...otherAttrs, assets: assets.filter(existAsset => existAsset.id !== asset.id) });
+
+    setRoomWithAssetsEdit(({ roomEdit, assetsEdit }) => {
+      assetsEdit.delete(asset.id);
+      return { roomEdit, assetsEdit}
+    });
+    
+  }
+
 
   const onRoomEdit = (roomEdit: RoomEdit) => {
     setRoom({ ...room, ...roomEdit });
@@ -111,6 +130,7 @@ function MainRoom(props: MainRoomProps) {
         onAssetCreated={onAssetCreated}
         selectedAsset={room.assets.find(asset => asset.id === selectedAssetId)}
         onAssetEdit={onAssetEdit}
+        onAssetRemoved={onAssetRemoved}
          />
       
       <div className='fixed top-5 right-52'>

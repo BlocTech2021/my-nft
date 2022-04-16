@@ -11,11 +11,12 @@ export type EditBoxProps = {
   selectedAsset?: Asset,
   onAssetEdit: (assetEdit: AssetEdit) => any
   onRoomEdit: (roomEdit: RoomEdit) => any
+  onAssetRemoved: (asset: Asset) => any
 }
 
 let previousSelectedAsset: any = undefined;
 
-export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEdit, onRoomEdit }: EditBoxProps) {
+export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEdit, onAssetRemoved, onRoomEdit }: EditBoxProps) {
 
   const tabs = [
     { name: 'Room' },
@@ -69,7 +70,9 @@ export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEd
               </div>
               
               { currentTabName === 'Room' && <RoomEditTab room={room} onRoomEdit={onRoomEdit} /> }
-              { currentTabName === 'Asset' && selectedAsset && <AssetEditTab asset={selectedAsset} onAssetEdit={onAssetEdit} /> }
+              { currentTabName === 'Asset' && selectedAsset && 
+                <AssetEditTab asset={selectedAsset}
+                  onAssetEdit={onAssetEdit} onAssetRemoved={onAssetRemoved} /> }
               { currentTabName === 'Items' && <ItemsSelect roomId={room.id} onAssetCreated={onAssetCreated} /> }
             </div>
           </div>

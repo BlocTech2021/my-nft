@@ -2,13 +2,49 @@ import { Asset, AssetEdit } from "../../../lib/types"
 import { Range } from "react-range";
 import { allColors } from "../../../lib/colors/color";
 import { ColorSelector } from "../../common/Color/ColorSelector";
+import { gql, useMutation } from "@apollo/client";
+import { removeAsset, removeAssetVariables } from "../../../__generated__/removeAsset";
+import { toastError, toastSuccess } from "../../common/toastUtils";
+
+const REMOVE_ASSET_MUTATION = gql`
+  mutation removeAsset($roomId: String!, $id: String!) {
+    removeAsset(roomId:$roomId,
+      id: $id) {
+      ok
+      error
+      data {
+        id
+      }
+    }
+  }
+`
 
 export type AssetEditTabProps = {
   asset: Asset,
-  onAssetEdit: (assetEdit: AssetEdit) => any
+  onAssetEdit: (assetEdit: AssetEdit) => any,
+  onAssetRemoved: (asset: Asset) => any
 }
 
-export function AssetEditTab({ asset, onAssetEdit }: AssetEditTabProps) {
+export function AssetEditTab({ asset, onAssetEdit, onAssetRemoved }: AssetEditTabProps) {
+  
+  const onRemoveAssetCompleted = async ({ removeAsset }: removeAsset) => {
+    const { ok, error, data } = removeAsset;
+    if(ok) {
+      toastSuccess("Asset removed successfully");
+      onAssetRemoved(asset);
+    } else {
+      toastError("Failed to remove asset");
+      console.log(`Create Asset failed: ${error}`);
+    }
+  }
+
+  const onRemoveAssetError = (error: any) => {
+    console.log(`onCreateAssetError: ${error}`);
+  }
+
+  const [removeAsset, { loading: removeAssetLoading }] = useMutation<removeAsset, removeAssetVariables>(REMOVE_ASSET_MUTATION, 
+    { onCompleted: onRemoveAssetCompleted, onError: onRemoveAssetError })
+
   return (
     <div className="mt-3 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
       <div className="sm:col-span-6">
@@ -151,8 +187,12 @@ export function AssetEditTab({ asset, onAssetEdit }: AssetEditTabProps) {
         </div>
       </div>
       <div className="sm:col-span-6">
-        <button className="w-full p-0 text-center inline-block items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          Remove Asset
+        <button className="w-full p-0 text-center inline-block items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          disabled={removeAssetLoading}
+          onClick={() => {
+            removeAsset({variables: { roomId: asset.roomId, id: asset.id }})
+          }}>
+          { removeAssetLoading ? 'Removing Asset...' : 'Remove Asset' }
           </button>
       </div>
     </div>

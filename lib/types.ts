@@ -60,4 +60,6 @@ export type AssetEdit = {
   shadow?: number;
   spaceFillColor?: string,
   spaceWidth?: number,
+  strokeWidth?: number;
+  strokeColor?: string;
 }

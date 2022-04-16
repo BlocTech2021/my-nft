@@ -1,6 +1,5 @@
 import classNames from "classnames"
 import { useEffect, useState } from "react"
-import { allColors } from "../../lib/colors/color"
 import { Asset, AssetEdit, Room, RoomEdit } from "../../lib/types"
 import { AssetEditTab } from "./tabs/AssetEdit"
 import { ItemsSelect } from "./tabs/ItemsSelect"
@@ -33,7 +32,9 @@ export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEd
     if(selectedAsset && selectedAsset !== previousSelectedAsset) {
       setCurrentTabName('Asset');
       previousSelectedAsset = selectedAsset;
-    } 
+    } else if (!selectedAsset) {
+      previousSelectedAsset = undefined;
+    }
   })
 
   return (

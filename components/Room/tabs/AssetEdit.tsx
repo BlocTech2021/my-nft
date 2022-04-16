@@ -11,7 +11,7 @@ export type AssetEditTabProps = {
 export function AssetEditTab({ asset, onAssetEdit }: AssetEditTabProps) {
   return (
     <div className="mt-3 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-      <div className="sm:col-span-4">
+      <div className="sm:col-span-6">
         <label htmlFor="username" className="block text-xs font-medium text-gray-700 mb-0">
           Space
         </label>
@@ -47,7 +47,7 @@ export function AssetEditTab({ asset, onAssetEdit }: AssetEditTabProps) {
         </div>
       </div>
 
-      <div className="sm:col-span-4">
+      <div className="sm:col-span-6">
         <label htmlFor="username" className="block text-xs font-medium text-gray-700 mb-0">
           Space Color
         </label>
@@ -63,7 +63,7 @@ export function AssetEditTab({ asset, onAssetEdit }: AssetEditTabProps) {
         </div>
       </div>
 
-      <div className="sm:col-span-4">
+      <div className="sm:col-span-6">
         <label htmlFor="username" className="block text-xs font-medium text-gray-700 mb-0">
           Border Width
         </label>
@@ -99,7 +99,7 @@ export function AssetEditTab({ asset, onAssetEdit }: AssetEditTabProps) {
         </div>
       </div>
 
-      <div className="sm:col-span-4">
+      <div className="sm:col-span-6">
         <label htmlFor="username" className="block text-xs font-medium text-gray-700 mb-0">
           Border Color
         </label>
@@ -115,7 +115,7 @@ export function AssetEditTab({ asset, onAssetEdit }: AssetEditTabProps) {
         </div>
       </div>
 
-      <div className="sm:col-span-4">
+      <div className="sm:col-span-6">
         <label htmlFor="username" className="block text-xs font-medium text-gray-700 mb-0">
           Shadow
         </label>
@@ -149,6 +149,11 @@ export function AssetEditTab({ asset, onAssetEdit }: AssetEditTabProps) {
               />
           </div>
         </div>
+      </div>
+      <div className="sm:col-span-6">
+        <button className="w-full p-0 text-center inline-block items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Remove Asset
+          </button>
       </div>
     </div>
   )

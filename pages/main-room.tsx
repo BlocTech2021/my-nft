@@ -84,7 +84,7 @@ export function transformAsset(assetData: getMainRoom_getMainRoom_data_assets): 
     y,
     width,
     height,
-    photoFrameUrl,
+    photoFrameUrl: photoFrameUrl ? photoFrameUrl : undefined,
     strokeWidth,
     strokeColor: strokeColor ? strokeColor : undefined,
     shadow,

@@ -150,7 +150,7 @@ function MainRoom(props: MainRoomProps) {
               value={userRoomUrl}
             />
             <div className="text-pearl cursor-pointer ml-3 bg p-2 rounded-md"
-              onClick={() => { window.open(userRoomUrl, '_blank').focus(); }}>
+              onClick={() => { typeof window !== "undefined" && window.open(userRoomUrl, '_blank')!.focus(); }}>
               <LogoutIcon className="h-5 w-5 text-white" />
             </div>
 

@@ -7,12 +7,13 @@ import PhotoFrame, { Frame } from "../PhotoFrame";
 
 export type RoomCanvaProps = {
   room: Room,
-  onAssetEdit: (assetEdit: AssetEdit) => any,
+  editable: boolean,
+  onAssetEdit?: (assetEdit: AssetEdit) => any,
   selectedAssetId?: string,
-  selectAssetWithId: Dispatch<SetStateAction<string | undefined>>
+  selectAssetWithId?: Dispatch<SetStateAction<string | undefined>>
 }
 
-function RoomCanva({ room, onAssetEdit, selectedAssetId, selectAssetWithId }: RoomCanvaProps) {
+function RoomCanva({ room, editable, onAssetEdit, selectedAssetId, selectAssetWithId }: RoomCanvaProps) {
 
   const [image] = useImage(room.backgroundImage?? '');
 
@@ -39,7 +40,12 @@ function RoomCanva({ room, onAssetEdit, selectedAssetId, selectAssetWithId }: Ro
   }
 
   return (
-    <Stage width={window.innerWidth} height={window.innerHeight} onClick={() => { selectAssetWithId(undefined) }}>
+    <Stage width={window.innerWidth} height={window.innerHeight} onClick={() => {
+      if(!selectAssetWithId) {
+        return;
+      }
+      selectAssetWithId(undefined) 
+    }}>
       <Layer>
         { renderBackground(room) }
       </Layer>
@@ -51,8 +57,8 @@ function RoomCanva({ room, onAssetEdit, selectedAssetId, selectAssetWithId }: Ro
           room.assets.map(asset => (
             <PhotoFrame key={asset.id} asset={asset} 
               isSelected={asset.id === selectedAssetId}
-              selectAssetWithId={selectAssetWithId}
-              onAssetEdit={onAssetEdit} />
+              selectAssetWithId={editable ? selectAssetWithId : undefined}
+              onAssetEdit={editable ? onAssetEdit : undefined} />
           ))
         }
       </Layer>

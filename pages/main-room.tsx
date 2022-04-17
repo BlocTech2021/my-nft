@@ -5,6 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import { getMainRoom, getMainRoom_getMainRoom_data, getMainRoom_getMainRoom_data_assets } from "../__generated__/getMainRoom";
 import { Asset, Room } from "../lib/types";
 import Loading from "../components/common/Loading/Loading";
+import { getRoomOfUser_getRoomOfUser_data } from "../__generated__/getRoomOfUser";
 
 const MainRoom = dynamic(() => import("../components/Room/MainRoom"), {
   ssr: false,
@@ -97,8 +98,6 @@ export function transformAsset(assetData: getMainRoom_getMainRoom_data_assets): 
     openseaImageThumbnailUrl,
   }
 }
-
-const colors = ['#2196F3', '#009688', '#9C27B0', '#FFEB3B', '#afbbc9', '#4CAF50', '#2d3748', '#f56565', '#ed64a6']
 
 const MainRoomPage: NextPage = () => {
 

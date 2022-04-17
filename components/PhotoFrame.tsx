@@ -3,16 +3,11 @@ import { Image, Group, Rect, Transformer } from "react-konva";
 import useImage from 'use-image';
 import { Asset, AssetEdit } from "../lib/types";
 
-export enum Frame {
-  Frame1,
-  Frame2
-}
-
 export type PhotoFrameProps = {
   asset: Asset;
   isSelected: boolean;
-  selectAssetWithId: Dispatch<SetStateAction<string | undefined>>;
-  onAssetEdit: (assetEdit: AssetEdit) => any
+  selectAssetWithId?: Dispatch<SetStateAction<string | undefined>>;
+  onAssetEdit?: (assetEdit: AssetEdit) => any
 }
 
 function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit } : PhotoFrameProps) {
@@ -38,8 +33,11 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit } : Phot
 
   return (
     <>
-      <Group ref={shapeRef} width={width} height={height} x={x} y={y} draggable 
+      <Group ref={shapeRef} width={width} height={height} x={x} y={y} draggable={!!selectAssetWithId}
         onDragEnd={(e) => {
+          if(!onAssetEdit) {
+            return;
+          }
           onAssetEdit({
             id: asset.id,
             x: e.target.x(),
@@ -48,11 +46,18 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit } : Phot
         }}
 
         onClick={(e) => {
+          if(!selectAssetWithId) {
+            return;
+          }
           selectAssetWithId(asset.id)
           e.cancelBubble = true;
         }}
 
         onTransformEnd={(e) => {
+          if(!onAssetEdit) {
+            return;
+          }
+
           // transformer is changing scale of the node
           // and NOT its width or height
           // but in the store we have only width and height

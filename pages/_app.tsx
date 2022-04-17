@@ -6,7 +6,7 @@ import { CookiesProvider } from "react-cookie"
 
 import { ApolloProvider } from '@apollo/react-hooks';
 import { apolloClient } from '../lib/apolloClient';
-import { AuthProvider } from '../lib/contexts/auth';
+import { AuthProvider, useAuth } from '../lib/contexts/auth';
 import { Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Head>
               <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
             </Head>
-            <Component {...pageProps} />
+            <Component {...pageProps} /> 
 
             <div className='absolute top-5 right-10'>
               <UserMenu />

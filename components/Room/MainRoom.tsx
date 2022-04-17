@@ -8,6 +8,7 @@ import { Asset, AssetEdit, Room, RoomEdit, RoomWithAssetsEdit } from "../../lib/
 import { updateRoom, updateRoomVariables } from "../../__generated__/updateRoom";
 import EditBox from "./EditBox";
 import RoomCanva from "./RoomCanva";
+import { useAuth } from "../../lib/contexts/auth";
 
 const UPDATE_ROOM_MUTATION = gql`
   mutation updateRoom($roomId: String!, 
@@ -44,7 +45,9 @@ function MainRoom(props: MainRoomProps) {
   const [roomWithAssetsEdit, setRoomWithAssetsEdit] = useState<RoomWithAssetsEdit>(initialRoomWithAssetsEdit())
 
   const [selectedAssetId, selectAssetWithId] = useState<string | undefined>(undefined);
-
+  
+  const { isLoggedIn, user } = useAuth()
+  
   // For mutation
   const onUpdateRoomCompleted = async ({ updateRoom }: updateRoom) => {
     if(updateRoom.ok) {
@@ -124,7 +127,7 @@ function MainRoom(props: MainRoomProps) {
 
   return (
     <>
-      <RoomCanva room={room} onAssetEdit={onAssetEdit}
+      <RoomCanva room={room} editable={true} onAssetEdit={onAssetEdit}
         selectedAssetId={selectedAssetId} selectAssetWithId={selectAssetWithId} />
       
       <EditBox room={room} 
@@ -134,6 +137,17 @@ function MainRoom(props: MainRoomProps) {
         onAssetEdit={onAssetEdit}
         onAssetRemoved={onAssetRemoved}
          />
+
+      <div className='fixed top-5 left-10'>
+        {
+          isLoggedIn &&
+          <input
+            type="text"
+            className="max-w-lg p-2 block w-56 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+            value={ typeof window !== "undefined" ? `${window.location.origin}/u/${user?.user.username}` : '' }
+          />
+        }
+      </div>     
       
       <div className='fixed top-5 right-52'>
         <button

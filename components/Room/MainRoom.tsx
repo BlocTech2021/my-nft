@@ -9,7 +9,7 @@ import { updateRoom, updateRoomVariables } from "../../__generated__/updateRoom"
 import EditBox from "./EditBox";
 import RoomCanva from "./RoomCanva";
 import { useAuth } from "../../lib/contexts/auth";
-import { SaveIcon } from "@heroicons/react/solid";
+import { ClipboardCopyIcon, LogoutIcon, SaveIcon } from "@heroicons/react/solid";
 
 const UPDATE_ROOM_MUTATION = gql`
   mutation updateRoom($roomId: String!, 
@@ -73,7 +73,6 @@ function MainRoom(props: MainRoomProps) {
   }
 
   const onAssetEdit = (assetEdit: AssetEdit) => {
-    console.log(`Asset edit: ${JSON.stringify(assetEdit)}`)
     const { assets, ...otherAttrs } = room;
     const assetIndex = assets.findIndex(asset => asset.id === assetEdit.id);
     if (assetIndex < 0) {
@@ -84,8 +83,6 @@ function MainRoom(props: MainRoomProps) {
 
     setRoomWithAssetsEdit(({ roomEdit, assetsEdit }) => ({ roomEdit, 
       assetsEdit: assetsEdit.set(assetEdit.id, {...assetsEdit.get(assetEdit.id), ...assetEdit}) }))
-
-    
   }
 
   const onAssetRemoved = (asset: Asset) => {
@@ -126,6 +123,10 @@ function MainRoom(props: MainRoomProps) {
     });
   }
 
+  const userRoomUrl = typeof window !== "undefined" ? `${window.location.origin}/u/${user?.user.username}` : ''
+
+  const [showCopied, setShowCopied] = useState<boolean>(false);
+
   return (
     <>
       <RoomCanva room={room} editable={true} onAssetEdit={onAssetEdit}
@@ -139,16 +140,40 @@ function MainRoom(props: MainRoomProps) {
         onAssetRemoved={onAssetRemoved}
          />
 
-      <div className='fixed top-5 left-10'>
+      
         {
           isLoggedIn &&
-          <input
-            type="text"
-            className="max-w-xl p-2 block w-56 shadow-sm bg text-pearl sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-            value={ typeof window !== "undefined" ? `${window.location.origin}/u/${user?.user.username}` : '' }
-          />
+          <div className='fixed top-5 left-10 flex align-center'>
+            <input
+              type="text"
+              className="max-w-xl p-1 block w-56 shadow-sm bg text-pearl sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+              value={userRoomUrl}
+            />
+            <div className="text-pearl cursor-pointer ml-3 bg p-2 rounded-md"
+              onClick={() => { window.open(userRoomUrl, '_blank').focus(); }}>
+              <LogoutIcon className="h-5 w-5 text-white" />
+            </div>
+
+            <div className="text-pearl cursor-pointer ml-3 bg p-2 rounded-md"
+              onClick={() => { 
+                navigator.clipboard.writeText(userRoomUrl);
+                setShowCopied(true);
+                setTimeout(() => {
+                  setShowCopied(false);
+                }, 1000);
+              }}>
+              <ClipboardCopyIcon className="h-5 w-5 text-white sm:max-w-xs sm:text-sm" />
+            </div>
+
+            {
+              showCopied &&
+              <span className="ml-1 text-pearl bg py-1 px-2 rounded-md">Copied!</span>
+            }
+           
+            
+          </div>
         }
-      </div>
+      
       
       <div className='fixed top-5 right-52'>
         <button

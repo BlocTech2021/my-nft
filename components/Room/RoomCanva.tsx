@@ -3,7 +3,7 @@ import { Stage, Layer, Circle, Image, Rect } from "react-konva";
 import useImage from "use-image";
 import { Color, getColorByName } from "../../lib/colors/color";
 import { AssetEdit, Room } from "../../lib/types";
-import PhotoFrame, { Frame } from "../PhotoFrame";
+import PhotoFrame from "../PhotoFrame";
 
 export type RoomCanvaProps = {
   room: Room,

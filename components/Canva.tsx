@@ -1,6 +1,5 @@
 import { Stage, Layer, Circle, Image } from "react-konva";
 import useImage from 'use-image';
-import PhotoFrame, { Frame } from "./PhotoFrame";
 
 function Canva() {
 

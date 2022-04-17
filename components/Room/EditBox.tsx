@@ -1,3 +1,4 @@
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/solid"
 import classNames from "classnames"
 import { useEffect, useState } from "react"
 import { Asset, AssetEdit, Room, RoomEdit } from "../../lib/types"
@@ -24,6 +25,8 @@ export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEd
     { name: 'Items' },
   ]
 
+  const [panelHidden, setPanelHidden] = useState<boolean>(false);
+
   const [currentTabName, setCurrentTabName] = useState(selectedAsset ? 'Asset' : 'Room');
 
   useEffect(() => {
@@ -38,23 +41,32 @@ export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEd
     }
   })
 
+  if (panelHidden) {
+    return (
+      <div className="bg-edit-box absolute top-20 right-10 opacity-90 text-pearl cursor-pointer p-2 sm:rounded-lg"
+        onClick={() => setPanelHidden(false)}>
+        <ArrowLeftIcon className="h-5 w-5 text-white" />
+      </div>
+    )
+  }
+
   return (
-    <div className="absolute top-20 right-10 flex flex-col justify-center py-0 px-0 text-xs">
+    <div className="absolute top-20 right-10 flex flex-col justify-center py-0 px-0 text-xs opacity-90 text-pearl">
         <div className="sm:mx-auto sm:w-full sm:max-w-lg">
-          <div className="bg-white py-6 px-2 shadow sm:rounded-lg sm:px-10">
+          <div className="bg-edit-box text-pearl py-6 px-2 shadow sm:rounded-lg sm:px-10">
             <div className="mx-auto w-96">
               <div>
-                <div className="border-b border-gray-200">
-                  <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+                <div className="border-b border-gray-200 flex justify-between items-end">
+                  <nav className="-mb-px flex items-end space-x-8" aria-label="Tabs">
                     {tabs.map((tab) => (
                       <a
                         key={tab.name}
                         className={classNames(
                           tab.disabled ? 'hidden' : '',
                           tab.name === currentTabName
-                            ? 'border-indigo-500 text-indigo-600'
-                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-                          'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm cursor-pointer'
+                            ? 'border-white text-pearl font-extrabold'
+                            : 'border-transparent text-pearl font-medium',
+                          'whitespace-nowrap py-4 px-1 border-b-2 cursor-pointer text-sm'
                         )}
                         aria-current={tab.name === currentTabName ? 'page' : undefined}
                         onClick = { e => {
@@ -66,6 +78,10 @@ export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEd
                       </a>
                     ))}
                   </nav>
+                  <div className="mb-4 text-pearl cursor-pointer"
+                    onClick={() => setPanelHidden(true)}>
+                    <ArrowRightIcon className="h-5 w-5 text-white" />
+                  </div>
                 </div>
               </div>
               

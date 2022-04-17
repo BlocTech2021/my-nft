@@ -30,7 +30,7 @@ export function RoomEditTab({ room, onRoomEdit } : RoomEditTabProps) {
   return (
     <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
       <div className="sm:col-span-4">
-        <label htmlFor="username" className="block text-xs font-medium text-gray-700 mb-2">
+        <label htmlFor="username" className="block text-xs font-medium mb-2">
           Background Color
         </label>
         <div className="mt-1 flex rounded-md shadow-sm">
@@ -42,7 +42,7 @@ export function RoomEditTab({ room, onRoomEdit } : RoomEditTabProps) {
       </div>
 
       <div className="sm:col-span-4">
-        <label htmlFor="username" className="block text-xs font-medium text-gray-700 mb-2">
+        <label htmlFor="username" className="block text-xs font-medium mb-2">
           Background Image
         </label>
         <div className="mt-1 flex rounded-md shadow-sm">

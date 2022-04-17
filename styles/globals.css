@@ -42,3 +42,11 @@ a {
 		transform: rotate(360deg);
 	}
 }
+
+.bg {
+	background: rgba(51,51,51,0.30);
+}
+
+.bg-edit-box {
+	background: rgba(51,51,51,0.80);
+}

@@ -9,6 +9,7 @@ import { updateRoom, updateRoomVariables } from "../../__generated__/updateRoom"
 import EditBox from "./EditBox";
 import RoomCanva from "./RoomCanva";
 import { useAuth } from "../../lib/contexts/auth";
+import { SaveIcon } from "@heroicons/react/solid";
 
 const UPDATE_ROOM_MUTATION = gql`
   mutation updateRoom($roomId: String!, 
@@ -143,19 +144,20 @@ function MainRoom(props: MainRoomProps) {
           isLoggedIn &&
           <input
             type="text"
-            className="max-w-lg p-2 block w-56 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+            className="max-w-xl p-2 block w-56 shadow-sm bg text-pearl sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
             value={ typeof window !== "undefined" ? `${window.location.origin}/u/${user?.user.username}` : '' }
           />
         }
-      </div>     
+      </div>
       
       <div className='fixed top-5 right-52'>
         <button
           onClick={() => onSaveChanges()}
           disabled={loading || (!roomWithAssetsEdit.roomEdit && roomWithAssetsEdit.assetsEdit.size === 0)}
           type="button"
-          className="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-md text-pearl bg focus:outline-none"
         >
+          <SaveIcon className="ml-2 mr-2 h-5 w-5" aria-hidden="true" />
           { loading ? 'Saving...' : 'Save Changes' }
         </button>
       </div>

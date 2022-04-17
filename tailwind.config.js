@@ -10,6 +10,11 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        charcoal: '#333333',
+        pearl: '#ffffff',
+        granite: '#666666'
+      }
     },
   },
   plugins: [],

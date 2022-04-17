@@ -2,9 +2,11 @@ import { Asset, AssetEdit } from "../../../lib/types"
 import { Range } from "react-range";
 import { allColors } from "../../../lib/colors/color";
 import { ColorSelector } from "../../common/Color/ColorSelector";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { removeAsset, removeAssetVariables } from "../../../__generated__/removeAsset";
 import { toastError, toastSuccess } from "../../common/toastUtils";
+import { getAllFrameImages } from "../../../__generated__/getAllFrameImages";
+import classNames from "classnames";
 
 const REMOVE_ASSET_MUTATION = gql`
   mutation removeAsset($roomId: String!, $id: String!) {
@@ -19,6 +21,20 @@ const REMOVE_ASSET_MUTATION = gql`
   }
 `
 
+const GET_ALL_FRAME_IMAGES = gql`
+  query getAllFrameImages {
+    getAllFrameImages {
+      ok
+      data {
+        cloudinaryId
+        publicId
+        thumbnailUrl
+        url
+      }
+    }
+  }
+`;
+
 export type AssetEditTabProps = {
   asset: Asset,
   onAssetEdit: (assetEdit: AssetEdit) => any,
@@ -26,6 +42,8 @@ export type AssetEditTabProps = {
 }
 
 export function AssetEditTab({ asset, onAssetEdit, onAssetRemoved }: AssetEditTabProps) {
+
+  const { data: frameData, loading, error } = useQuery<getAllFrameImages>(GET_ALL_FRAME_IMAGES);
   
   const onRemoveAssetCompleted = async ({ removeAsset }: removeAsset) => {
     const { ok, error, data } = removeAsset;
@@ -47,6 +65,34 @@ export function AssetEditTab({ asset, onAssetEdit, onAssetRemoved }: AssetEditTa
 
   return (
     <div className="mt-3 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+      <div className="sm:col-span-6">
+        <label htmlFor="username" className="block text-xs font-medium text-gray-700 mb-2">
+          Frame
+        </label>
+        <div className="mt-1 flex rounded-md shadow-sm">
+          <div className="rounded-md shadow-xs px-0 py-0 flex overflow-x-scroll">
+            <div className={classNames(asset.photoFrameUrl ? 'border-slate-200' : 'border-black', "w-12 h-9 border-2 mr-1 cursor-pointer")}
+              onClick={() => {
+                onAssetEdit({ id: asset.id, photoFrameUrl: '' })
+              }}> {/** This is for no frame image */}
+
+            </div>
+
+            {
+              frameData && frameData.getAllFrameImages && frameData.getAllFrameImages.data &&
+              frameData.getAllFrameImages.data.map(frameImg => (
+                  <div key={frameImg.publicId} className={classNames(frameImg.url === asset.photoFrameUrl ? 'border-black border-2' : '', "w-12 h-9 mr-1 cursor-pointer")}
+                    onClick={() => {
+                      onAssetEdit({ id: asset.id, photoFrameUrl: frameImg.url })
+                    }}>
+                    <img src={frameImg.thumbnailUrl} alt="Background Image" className="w-full h-full" />
+                  </div>
+                ))
+            }
+          </div>
+        </div>
+      </div>
+
       <div className="sm:col-span-6">
         <label htmlFor="username" className="block text-xs font-medium text-gray-700 mb-0">
           Space

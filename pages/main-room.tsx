@@ -29,6 +29,7 @@ const GET_MAIN_ROOM_QUERY = gql`
           y
           width
           height
+          photoFrameUrl
           strokeWidth
           strokeColor
           spaceFillColor
@@ -62,6 +63,7 @@ export function transformAsset(assetData: getMainRoom_getMainRoom_data_assets): 
     y,
     width,
     height,
+    photoFrameUrl,
     strokeWidth,
     strokeColor,
     shadow,
@@ -82,6 +84,7 @@ export function transformAsset(assetData: getMainRoom_getMainRoom_data_assets): 
     y,
     width,
     height,
+    photoFrameUrl,
     strokeWidth,
     strokeColor: strokeColor ? strokeColor : undefined,
     shadow,

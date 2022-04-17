@@ -10,7 +10,7 @@ export type RoomEditTabProps = {
   onRoomEdit: (roomEdit: RoomEdit) => any
 }
 
-export const getAllBackgroundImages = gql`
+export const GET_ALL_BACKGROUND_IMAGES = gql`
   query getAllBackgroundImages {
     getAllBackgroundImages {
       ok
@@ -25,7 +25,7 @@ export const getAllBackgroundImages = gql`
 `
 
 export function RoomEditTab({ room, onRoomEdit } : RoomEditTabProps) {
-  const { data, loading, error } = useQuery<getAllBackgroundImages>(getAllBackgroundImages);
+  const { data, loading, error } = useQuery<getAllBackgroundImages>(GET_ALL_BACKGROUND_IMAGES);
 
   return (
     <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -57,7 +57,7 @@ export function RoomEditTab({ room, onRoomEdit } : RoomEditTabProps) {
             {
               data && data.getAllBackgroundImages && data.getAllBackgroundImages.data &&
                 data.getAllBackgroundImages.data.map(bgImg => (
-                  <div className={classNames(bgImg.url === room.backgroundImage ? 'border-black border-2' : '', "w-12 h-9 mr-1 cursor-pointer")}
+                  <div key={bgImg.publicId} className={classNames(bgImg.url === room.backgroundImage ? 'border-black border-2' : '', "w-12 h-9 mr-1 cursor-pointer")}
                     onClick={() => {
                       onRoomEdit({ backgroundImage: bgImg.url })
                     }}>

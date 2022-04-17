@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface getAllBackgroundImages_getAllBackgroundImages_data {
-  __typename: "CloudinayBackgroundImage";
+  __typename: "CloudinaryImage";
   cloudinaryId: string;
   publicId: string;
   thumbnailUrl: string;

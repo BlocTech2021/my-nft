@@ -62,4 +62,5 @@ export type AssetEdit = {
   spaceWidth?: number,
   strokeWidth?: number;
   strokeColor?: string;
+  photoFrameUrl?: string;
 }

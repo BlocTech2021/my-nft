@@ -16,6 +16,7 @@ export interface getMainRoom_getMainRoom_data_assets {
   y: number;
   width: number;
   height: number;
+  photoFrameUrl: string | null;
   strokeWidth: number;
   strokeColor: string | null;
   spaceFillColor: string | null;

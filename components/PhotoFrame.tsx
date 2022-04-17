@@ -29,17 +29,6 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit } : Phot
 
   const { x, y, openseaImageUrl, width, height, photoFrameUrl, strokeWidth,
     strokeColor,  spaceWidth, spaceFillColor, shadow } = asset;
-  // let frameSrc = undefined;
-  // let frameImage: HTMLImageElement | undefined = undefined;
-  // switch(photoFrameUrl) {
-  //   case 'frame1':
-  //     frameSrc = "/frames/frame1.png";
-  //     break;
-  //   case Frame.Frame2:
-  //     frameSrc = "/frames/frame2.png";
-  //     break;
-  // }
-  console.log(`shadow: ${shadow}`)
   const [frameImage] = useImage(photoFrameUrl?? '');
   const [image] = useImage(openseaImageUrl);
 
@@ -91,9 +80,9 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit } : Phot
           width={width - (spaceWidth?? 0) * 2} height={height - (spaceWidth?? 0) * 2}
           x={spaceWidth?? 0} y={spaceWidth?? 0} />
         {
-          photoFrameUrl &&  
-            <Image image={frameImage} width={width} height={height}
-              x={0} y={0} alt="Frame" />
+          !!photoFrameUrl &&
+            <Image image={frameImage} width={width + 20} height={height + 20}
+              x={-10} y={-10} alt="Frame" />
         }
 
         

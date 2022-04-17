@@ -38,7 +38,6 @@ function MainRoom(props: MainRoomProps) {
   }
   
   const [room, setRoom] = useState<Room>(initialValue);
-  console.log(`initialValue: ${JSON.stringify(room)}`);
 
   const initialRoomWithAssetsEdit = () => ({ assetsEdit: new Map<string, AssetEdit>() })
 
@@ -49,7 +48,6 @@ function MainRoom(props: MainRoomProps) {
   // For mutation
   const onUpdateRoomCompleted = async ({ updateRoom }: updateRoom) => {
     if(updateRoom.ok) {
-      console.log(`onUpdateRoomCompleted ok`)
       setRoomWithAssetsEdit(initialRoomWithAssetsEdit())
       toastSuccess("Changes successfully saved!");
     } else {
@@ -71,6 +69,7 @@ function MainRoom(props: MainRoomProps) {
   }
 
   const onAssetEdit = (assetEdit: AssetEdit) => {
+    console.log(`Asset edit: ${JSON.stringify(assetEdit)}`)
     const { assets, ...otherAttrs } = room;
     const assetIndex = assets.findIndex(asset => asset.id === assetEdit.id);
     if (assetIndex < 0) {
@@ -81,6 +80,8 @@ function MainRoom(props: MainRoomProps) {
 
     setRoomWithAssetsEdit(({ roomEdit, assetsEdit }) => ({ roomEdit, 
       assetsEdit: assetsEdit.set(assetEdit.id, {...assetsEdit.get(assetEdit.id), ...assetEdit}) }))
+
+    
   }
 
   const onAssetRemoved = (asset: Asset) => {
@@ -111,6 +112,7 @@ function MainRoom(props: MainRoomProps) {
   }
 
   const onSaveChanges = () => {
+    console.log(`onSaveChanges: ${JSON.stringify(Array.from(roomWithAssetsEdit.assetsEdit.values()))}`)
     updateRoom({
       variables: {
         roomId: room.id,

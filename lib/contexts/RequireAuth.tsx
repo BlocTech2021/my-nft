@@ -3,7 +3,6 @@ import { useAuth } from "./auth";
 
 export const RequireAuth = ({ children } : { children: any}) => {
   const { isLoggedIn } = useAuth();
-  console.log(`isLoggedIn: ${isLoggedIn}`);
   if (!isLoggedIn && !(typeof window === 'undefined')) {
     return authError(); 
   }

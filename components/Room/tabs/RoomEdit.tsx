@@ -31,7 +31,7 @@ export function RoomEditTab({ room, onRoomEdit } : RoomEditTabProps) {
     <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
       <div className="sm:col-span-4">
         <label htmlFor="username" className="block text-xs font-medium mb-2">
-          Background Color
+          Wall Color
         </label>
         <div className="mt-1 flex rounded-md shadow-sm">
           <div className="rounded-md shadow-xs px-0 py-0 flex">
@@ -43,15 +43,15 @@ export function RoomEditTab({ room, onRoomEdit } : RoomEditTabProps) {
 
       <div className="sm:col-span-4">
         <label htmlFor="username" className="block text-xs font-medium mb-2">
-          Background Image
+          Wallpaper
         </label>
         <div className="mt-1 flex rounded-md shadow-sm">
           <div className="rounded-md shadow-xs px-0 py-0 flex">
-            <div className={classNames(room.backgroundImage ? 'border-slate-200' : 'border-black', "w-12 h-9 border-2 mr-1 cursor-pointer")}
+            <div className={classNames(room.backgroundImage ? 'border-slate-200 border' : 'border-black border-2', "w-12 h-9 mr-1 cursor-pointer flex items-center justify-center")}
               onClick={() => {
                 onRoomEdit({ backgroundImage: '' })
               }}> {/** This is for no background image */}
-
+              <span>Clear</span>
             </div>
 
             {

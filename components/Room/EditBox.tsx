@@ -21,20 +21,20 @@ export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEd
 
   const tabs = [
     { name: 'Room' },
-    { name: 'Asset', disabled: !selectedAsset },
-    { name: 'Items' },
+    { name: 'NFT' },
+    { name: 'Decoration', disabled: !selectedAsset },
   ]
 
   const [panelHidden, setPanelHidden] = useState<boolean>(false);
 
-  const [currentTabName, setCurrentTabName] = useState(selectedAsset ? 'Asset' : 'Room');
+  const [currentTabName, setCurrentTabName] = useState(selectedAsset ? 'Decoration' : 'Room');
 
   useEffect(() => {
-    if(!selectedAsset && currentTabName === 'Asset') {
+    if(!selectedAsset && currentTabName === 'Decoration') {
       setCurrentTabName('Room');
     }
     if(selectedAsset && selectedAsset !== previousSelectedAsset) {
-      setCurrentTabName('Asset');
+      setCurrentTabName('Decoration');
       previousSelectedAsset = selectedAsset;
     } else if (!selectedAsset) {
       previousSelectedAsset = undefined;
@@ -86,10 +86,10 @@ export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEd
               </div>
               
               { currentTabName === 'Room' && <RoomEditTab room={room} onRoomEdit={onRoomEdit} /> }
-              { currentTabName === 'Asset' && selectedAsset && 
+              { currentTabName === 'NFT' && <ItemsSelect roomId={room.id} onAssetCreated={onAssetCreated} /> }
+              { currentTabName === 'Decoration' && selectedAsset && 
                 <AssetEditTab asset={selectedAsset}
                   onAssetEdit={onAssetEdit} onAssetRemoved={onAssetRemoved} /> }
-              { currentTabName === 'Items' && <ItemsSelect roomId={room.id} onAssetCreated={onAssetCreated} /> }
             </div>
           </div>
         </div>

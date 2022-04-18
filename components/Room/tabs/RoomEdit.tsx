@@ -41,12 +41,12 @@ export function RoomEditTab({ room, onRoomEdit } : RoomEditTabProps) {
         </div>
       </div>
 
-      <div className="sm:col-span-4">
+      <div className="sm:col-span-6">
         <label htmlFor="username" className="block text-xs font-medium mb-2">
           Wallpaper
         </label>
         <div className="mt-1 flex rounded-md shadow-sm">
-          <div className="rounded-md shadow-xs px-0 py-0 flex">
+          <div className="rounded-md shadow-xs px-0 py-0 flex w-full">
             <div className={classNames(room.backgroundImage ? 'border-slate-200 border' : 'border-black border-2', "w-12 h-9 mr-1 cursor-pointer flex items-center justify-center")}
               onClick={() => {
                 onRoomEdit({ backgroundImage: '' })

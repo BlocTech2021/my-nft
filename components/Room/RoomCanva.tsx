@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
+import { Shape, ShapeConfig } from "konva/lib/Shape";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { Stage, Layer } from "react-konva";
 import { getColorByName, hexToRgb } from "../../lib/colors/color";
 import { AssetEdit, Room } from "../../lib/types";
@@ -15,6 +16,18 @@ export type RoomCanvaProps = {
 function RoomCanva({ room, editable, onAssetEdit, selectedAssetId, selectAssetWithId }: RoomCanvaProps) {
 
   let backgroundStyle = {};
+  let photosLayer: any = useRef(null);
+  let dragLayer: any = useRef(null);
+
+  const onDragStart = (photo: Shape<ShapeConfig>) => {
+    photo.moveTo(dragLayer.current);
+  }
+
+  const onDragEnd = (photo: Shape<ShapeConfig>) => {
+    photo.moveTo(photosLayer.current);
+  }
+  
+
   if (room.backgroundImage) {
     backgroundStyle = {
       backgroundImage: `url(${room.backgroundImage})`,
@@ -38,15 +51,20 @@ function RoomCanva({ room, editable, onAssetEdit, selectedAssetId, selectAssetWi
         selectAssetWithId(undefined) 
       }}>
         {/* put origin as center of screen */}
-        <Layer offsetX={-window.innerWidth / 2} offsetY={-window.innerHeight / 2}> 
+        <Layer ref={photosLayer} offsetX={-window.innerWidth / 2} offsetY={-window.innerHeight / 2}> 
           {
             room.assets.map(asset => (
               <PhotoFrame key={asset.id} asset={asset} 
                 isSelected={asset.id === selectedAssetId}
                 selectAssetWithId={editable ? selectAssetWithId : undefined}
-                onAssetEdit={editable ? onAssetEdit : undefined} />
+                onAssetEdit={editable ? onAssetEdit : undefined}
+                onDragStart={editable ? onDragStart : undefined}
+                onDragEnd={editable ? onDragEnd : undefined} />
             ))
           }
+        </Layer>
+        {/** Drag layer */}
+        <Layer ref={dragLayer} offsetX={-window.innerWidth / 2} offsetY={-window.innerHeight / 2}>
         </Layer>
       </Stage>
     </div>

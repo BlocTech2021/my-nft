@@ -2,15 +2,18 @@ import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { Image, Group, Rect, Transformer } from "react-konva";
 import useImage from 'use-image';
 import { Asset, AssetEdit } from "../lib/types";
+import { Shape, ShapeConfig } from "konva/lib/Shape";
 
 export type PhotoFrameProps = {
   asset: Asset;
   isSelected: boolean;
   selectAssetWithId?: Dispatch<SetStateAction<string | undefined>>;
-  onAssetEdit?: (assetEdit: AssetEdit) => any
+  onAssetEdit?: (assetEdit: AssetEdit) => any;
+  onDragStart?: (photo: Shape<ShapeConfig>) => void;
+  onDragEnd?: (photo: Shape<ShapeConfig>) => void;
 }
 
-function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit } : PhotoFrameProps) {
+function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragStart, onDragEnd } : PhotoFrameProps) {
   const shapeRef: any = useRef();
   const trRef: any = useRef();
 
@@ -27,16 +30,26 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit } : Phot
   const [frameImage] = useImage(photoFrameUrl?? '');
   const [image] = useImage(openseaImageUrl);
 
-  if (image) {
-    console.log(JSON.stringify(asset));
-  }
-
   return (
     <>
       <Group ref={shapeRef} width={width} height={height} x={x} y={y} draggable={!!selectAssetWithId}
-        onDragEnd={(e) => {
-          if(!onAssetEdit) {
+        onDragStart={(e) => {
+          if(!onDragStart) {
             return;
+          }
+          if(isSelected) {
+            onDragStart(trRef.current)
+          }
+          onDragStart(e.target as any)
+        }}
+
+        onDragEnd={(e) => {
+          if(!onAssetEdit || !onDragEnd) {
+            return;
+          }
+          onDragEnd(e.target as any)
+          if(isSelected) {
+            onDragEnd(trRef.current)
           }
           onAssetEdit({
             id: asset.id,
@@ -96,6 +109,7 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit } : Phot
         <Transformer
           rotateEnabled={false}
           ref={trRef}
+          padding={5}
           boundBoxFunc={(oldBox, newBox) => {
             // limit resize
             if (newBox.width < 5 || newBox.height < 5) {

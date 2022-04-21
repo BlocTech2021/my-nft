@@ -98,7 +98,7 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
           width={width - (spaceWidth?? 0) * 2} height={height - (spaceWidth?? 0) * 2}
           x={spaceWidth?? 0} y={spaceWidth?? 0} />
         
-        <ReactShape sceneFunc={(context, shape) => {
+        {/* <ReactShape sceneFunc={(context, shape) => {
               const spaceWidthFixed = spaceWidth?? 0;
               context.beginPath();
               context.moveTo(spaceWidthFixed, spaceWidthFixed);
@@ -131,7 +131,7 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
             fill="#bbbbbb"
             opacity={0.1}
             stroke="rgba(254,254,254)"
-            strokeWidth={0} />
+            strokeWidth={0} /> */}
 
         {
           !!photoFrameUrl &&

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
-import { Image, Group, Rect, Transformer } from "react-konva";
+import { Image, Group, Rect, Transformer, Shape as ReactShape } from "react-konva";
 import useImage from 'use-image';
 import { Asset, AssetEdit } from "../lib/types";
 import { Shape, ShapeConfig } from "konva/lib/Shape";
@@ -97,6 +97,42 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
         <Image image={image}
           width={width - (spaceWidth?? 0) * 2} height={height - (spaceWidth?? 0) * 2}
           x={spaceWidth?? 0} y={spaceWidth?? 0} />
+        
+        <ReactShape sceneFunc={(context, shape) => {
+              const spaceWidthFixed = spaceWidth?? 0;
+              context.beginPath();
+              context.moveTo(spaceWidthFixed, spaceWidthFixed);
+              context.lineTo(spaceWidthFixed + Math.ceil(width / 3), spaceWidthFixed);
+              context.lineTo(spaceWidthFixed + Math.ceil(width / 11), height - spaceWidthFixed);
+              context.lineTo(spaceWidthFixed, height - spaceWidthFixed);
+              context.lineTo(spaceWidthFixed, spaceWidthFixed);
+              context.closePath();
+               context.fill();
+              // (!) Konva specific method, it is very important
+              context.fillStrokeShape(shape);
+            }}
+            fill="rgba(255,255,255)"
+            opacity={0.1}
+            stroke="rgba(254,254,254)"
+            strokeWidth={0} />
+        <ReactShape sceneFunc={(context, shape) => {
+              const spaceWidthFixed = spaceWidth?? 0;
+              context.beginPath();
+              context.moveTo(spaceWidthFixed + Math.ceil(width / 3), spaceWidthFixed);
+              context.lineTo(width - spaceWidthFixed, spaceWidthFixed);
+              context.lineTo(width - spaceWidthFixed, height - spaceWidthFixed);
+              context.lineTo(spaceWidthFixed + Math.ceil(width / 11), height - spaceWidthFixed);
+              context.lineTo(spaceWidthFixed + Math.ceil(width / 3), spaceWidthFixed);
+              context.closePath();
+               context.fill();
+              // (!) Konva specific method, it is very important
+              context.fillStrokeShape(shape);
+            }}
+            fill="#bbbbbb"
+            opacity={0.1}
+            stroke="rgba(254,254,254)"
+            strokeWidth={0} />
+
         {
           !!photoFrameUrl &&
             <Image image={frameImage} width={width + 20} height={height + 20}

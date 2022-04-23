@@ -100,7 +100,7 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
           width={width - (spaceWidth?? 0) * 2} height={height - (spaceWidth?? 0) * 2}
           x={spaceWidth?? 0} y={spaceWidth?? 0} />
         
-        {/* <ReactShape sceneFunc={(context, shape) => {
+        <ReactShape sceneFunc={(context, shape) => {
               
               context.beginPath();
               // let gradient = context.createLinearGradient(spaceWidthFixed, spaceWidthFixed, spaceWidthFixed + Math.ceil(width / 11), height - spaceWidthFixed)
@@ -137,7 +137,7 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
             fill="#777777"
             opacity={0.1}
             stroke="rgba(254,254,254)"
-            strokeWidth={0} /> */}
+            strokeWidth={0} />
 
         {
           !!photoFrameUrl &&

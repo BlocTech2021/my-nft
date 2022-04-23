@@ -30,6 +30,8 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
   const [frameImage] = useImage(photoFrameUrl?? '');
   const [image] = useImage(openseaImageUrl);
 
+  const spaceWidthFixed = spaceWidth?? 0;
+
   return (
     <>
       <Group ref={shapeRef} width={width} height={height} x={x} y={y} draggable={!!selectAssetWithId}
@@ -99,8 +101,9 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
           x={spaceWidth?? 0} y={spaceWidth?? 0} />
         
         {/* <ReactShape sceneFunc={(context, shape) => {
-              const spaceWidthFixed = spaceWidth?? 0;
+              
               context.beginPath();
+              // let gradient = context.createLinearGradient(spaceWidthFixed, spaceWidthFixed, spaceWidthFixed + Math.ceil(width / 11), height - spaceWidthFixed)
               context.moveTo(spaceWidthFixed, spaceWidthFixed);
               context.lineTo(spaceWidthFixed + Math.ceil(width / 3), spaceWidthFixed);
               context.lineTo(spaceWidthFixed + Math.ceil(width / 11), height - spaceWidthFixed);
@@ -111,7 +114,10 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
               // (!) Konva specific method, it is very important
               context.fillStrokeShape(shape);
             }}
-            fill="rgba(255,255,255)"
+            // fill="rgba(255,255,255)"
+            fillLinearGradientStartPoint={{ x: spaceWidthFixed, y: spaceWidthFixed  }}
+            fillLinearGradientEndPoint={{ x: spaceWidthFixed + Math.ceil(width / 11), y: height - spaceWidthFixed  }}
+            fillLinearGradientColorStops={[0, 'rgba(255,255,255)', 1, 'rgba(100, 100, 100)']}
             opacity={0.1}
             stroke="rgba(254,254,254)"
             strokeWidth={0} />
@@ -128,7 +134,7 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
               // (!) Konva specific method, it is very important
               context.fillStrokeShape(shape);
             }}
-            fill="#bbbbbb"
+            fill="#777777"
             opacity={0.1}
             stroke="rgba(254,254,254)"
             strokeWidth={0} /> */}

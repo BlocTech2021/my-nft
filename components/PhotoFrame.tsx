@@ -95,7 +95,8 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
           })
         }}>
         <Rect x={0} y={0} width={width} height={height} strokeWidth={strokeWidth} stroke={strokeColor}
-          shadowBlur={shadow} shadowEnabled={shadow > 0} fill={spaceFillColor} />
+          shadowBlur={shadow} shadowEnabled={shadow > 0} fill={spaceFillColor} shadowColor={'black'}
+          shadowOffsetX={8} shadowOffsetY={8} shadowOpacity={0.7} />
         <Image image={image}
           width={width - (spaceWidth?? 0) * 2} height={height - (spaceWidth?? 0) * 2}
           x={spaceWidth?? 0} y={spaceWidth?? 0} />
@@ -141,8 +142,8 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
 
         {
           !!photoFrameUrl &&
-            <Image image={frameImage} width={width + 10} height={height + 10}
-              x={-5} y={-5} alt="Frame" />
+            <Image image={frameImage} width={width + 0} height={height + 0}
+              x={0} y={0} alt="Frame" />
         }
 
         

@@ -11,14 +11,14 @@ export const allColors: Color[] = [
     stopRgb: '#d7e1ec',
   },
   {
-    name: 'megaman',
-    startRgb: '#d0fdd5',
-    stopRgb: '#b6e7bb',
-  },
-  {
     name: 'sambucus',
     startRgb: '#111827',
     stopRgb: '#4b5563',
+  },
+  {
+    name: 'megaman',
+    startRgb: '#d0fdd5',
+    stopRgb: '#b6e7bb',
   },
   {
     name: 'daffodil',

@@ -12,8 +12,8 @@ export const allColors: Color[] = [
   },
   {
     name: 'megaman',
-    startRgb: '#38bdf8',
-    stopRgb: '#3b82f6',
+    startRgb: '#d0fdd5',
+    stopRgb: '#b6e7bb',
   },
   {
     name: 'sambucus',
@@ -22,18 +22,18 @@ export const allColors: Color[] = [
   },
   {
     name: 'daffodil',
-    startRgb: '#fef08a',
-    stopRgb: '#facc15',
+    startRgb: '#c4bebb',
+    stopRgb: '#aaa4a0',
   },
   {
     name: 'fuchsia',
-    startRgb: '#6b21a8',
-    stopRgb: '#c084fc',
+    startRgb: '#9ab3d7',
+    stopRgb: '#7c97be',
   },
   {
     name: 'popGum',
-    startRgb: '#f472b6',
-    stopRgb: '#db2777',
+    startRgb: '#d8beb0',
+    stopRgb: '#c7ab98',
   },
   {
     name: 'vanilla',
@@ -41,14 +41,14 @@ export const allColors: Color[] = [
     stopRgb: '#ccfbf1',
   },
   {
-    name: 'green',
-    startRgb: '#10b981',
-    stopRgb: '#65a30d',
+    name: 'orange',
+    startRgb: '#ec896b',
+    stopRgb: '#da613e',
   },
   {
-    name: 'orange',
-    startRgb: '#ea580c',
-    stopRgb: '#f97316',
+    name: 'green',
+    startRgb: '#5cbbc1',
+    stopRgb: '#469ca1',
   }
 ]
 

@@ -141,8 +141,8 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
 
         {
           !!photoFrameUrl &&
-            <Image image={frameImage} width={width + 20} height={height + 20}
-              x={-10} y={-10} alt="Frame" />
+            <Image image={frameImage} width={width + 10} height={height + 10}
+              x={-5} y={-5} alt="Frame" />
         }
 
         

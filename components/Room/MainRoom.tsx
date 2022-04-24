@@ -10,6 +10,8 @@ import EditBox from "./EditBox";
 import RoomCanva from "./RoomCanva";
 import { useAuth } from "../../lib/contexts/auth";
 import { ClipboardCopyIcon, LogoutIcon, SaveIcon } from "@heroicons/react/solid";
+import { BiCopyAlt } from 'react-icons/bi'
+import { FaShare } from "react-icons/fa";
 
 const UPDATE_ROOM_MUTATION = gql`
   mutation updateRoom($roomId: String!, 
@@ -151,7 +153,7 @@ function MainRoom(props: MainRoomProps) {
             />
             <div className="text-pearl cursor-pointer ml-3 bg p-2 rounded-md"
               onClick={() => { typeof window !== "undefined" && window.open(userRoomUrl, '_blank')!.focus(); }}>
-              <LogoutIcon className="h-5 w-5 text-white" />
+              <FaShare className="h-5 w-5 text-white" />
             </div>
 
             <div className="text-pearl cursor-pointer ml-3 bg p-2 rounded-md"
@@ -162,7 +164,7 @@ function MainRoom(props: MainRoomProps) {
                   setShowCopied(false);
                 }, 1000);
               }}>
-              <ClipboardCopyIcon className="h-5 w-5 text-white sm:max-w-xs sm:text-sm" />
+              <BiCopyAlt className="h-5 w-5 text-white sm:max-w-xs sm:text-sm" />
             </div>
 
             {

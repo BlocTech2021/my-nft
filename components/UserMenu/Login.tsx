@@ -1,5 +1,5 @@
 import { ApolloError, gql, useMutation } from '@apollo/client'
-import { MailIcon } from '@heroicons/react/solid'
+import { BiWalletAlt } from 'react-icons/bi'
 import MetaMaskOnboarding from '@metamask/onboarding';
 import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
@@ -126,9 +126,10 @@ export default function Login() {
       signatureLoginLoading && 'Login...'
     }
     {
-      (!getNonceLoading && !signatureLoginLoading) && 'Login with Metamask'
+      (!getNonceLoading && !signatureLoginLoading) && 'Connect Wallet'
     }
-    <MailIcon className="ml-2 -mr-1 h-5 w-5" aria-hidden="true" />
+    <BiWalletAlt className="ml-2 -mr-1 h-5 w-5" aria-hidden="true" />
+    
     </button>
   )
 }

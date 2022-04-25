@@ -46,25 +46,34 @@ export function RoomEditTab({ room, onRoomEdit } : RoomEditTabProps) {
           Wallpaper
         </label>
         <div className="mt-1 flex rounded-md shadow-sm">
-          <div className="rounded-md shadow-xs px-0 py-0 flex w-full">
-            <div className={classNames(room.backgroundImage ? 'border-slate-200 border' : 'border-black border-2', "w-12 h-9 mr-1 cursor-pointer flex items-center justify-center")}
-              onClick={() => {
-                onRoomEdit({ backgroundImage: '' })
-              }}> {/** This is for no background image */}
-              <span>Clear</span>
-            </div>
+          <div className="rounded-md shadow-xs px-0 py-0 container w-full overflow-x-auto">
+            <ul className="flex mt-0 mb-0 overflow-x-auto overflow-y-visible">
+              <li className="flex-grow-0 flex-shrink-0">
+                <div className={classNames(room.backgroundImage ? 'border-slate-200 border' : 'border-black border-2', "w-8 h-6 grow-0 basis-12  mr-1 cursor-pointer flex items-center justify-center")}
+                  onClick={() => {
+                    onRoomEdit({ backgroundImage: '' })
+                  }}> {/** This is for no background image */}
+                  <span>Clear</span>
+                </div>
+              </li>
+              {
+                data && data.getAllBackgroundImages && data.getAllBackgroundImages.data &&
+                  data.getAllBackgroundImages.data.map(bgImg => (
+                    <li className="flex-grow-0 flex-shrink-0">
+                      <div key={bgImg.publicId} className={classNames(bgImg.url === room.backgroundImage ? 'border-black border-2' : '', "w-8 h-6 grow-0 basis-12 mr-1 cursor-pointer")}
+                        onClick={() => {
+                          onRoomEdit({ backgroundImage: bgImg.url })
+                        }}>
+                        <img src={bgImg.thumbnailUrl} alt="Background Image" className="w-full h-full" />
+                      </div>
+                    </li>
+                  ))
+              }
+            </ul>
 
-            {
-              data && data.getAllBackgroundImages && data.getAllBackgroundImages.data &&
-                data.getAllBackgroundImages.data.map(bgImg => (
-                  <div key={bgImg.publicId} className={classNames(bgImg.url === room.backgroundImage ? 'border-black border-2' : '', "w-12 h-9 mr-1 cursor-pointer")}
-                    onClick={() => {
-                      onRoomEdit({ backgroundImage: bgImg.url })
-                    }}>
-                    <img src={bgImg.thumbnailUrl} alt="Background Image" className="w-full h-full" />
-                  </div>
-                ))
-            }
+            
+
+            
           </div>
 
           

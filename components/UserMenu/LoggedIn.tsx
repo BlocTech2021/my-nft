@@ -53,8 +53,8 @@ export default function LoggedIn({ user }: LoggedInProps) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="origin-top-right absolute right-0 mt-2 -mr-1 w-56 rounded-md shadow-lg  text-pearl ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="py-1">
+          <Menu.Items className="origin-top-right absolute right-0 mt-1 -mr-1 w-56 rounded-md shadow-lg  text-pearl ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="py-1 bg">
               {items.map((item) => (
                 <Menu.Item key={item.name}>
                   {({ active }) => (

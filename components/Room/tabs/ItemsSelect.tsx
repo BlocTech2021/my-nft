@@ -6,6 +6,7 @@ import { createAsset, createAssetVariables } from "../../../__generated__/create
 import { getOpenseaAssets, getOpenseaAssetsVariables } from "../../../__generated__/getOpenseaAssets";
 import Loading from "../../common/Loading/Loading";
 import Image from 'next/image'
+import { useAuth } from "../../../lib/contexts/auth";
 
 export const GET_OPENSEA_ASSETS = gql`
   query getOpenseaAssets($ownerAddress: String!, $cursor: String) {
@@ -85,8 +86,11 @@ type ImageSize = {
 }
 
 export function ItemsSelect({ roomId, onAssetCreated } : ItemsSelectProps) {
+  const { isLoggedIn, user } = useAuth()
+
   const { data, loading, error } = useQuery<getOpenseaAssets, getOpenseaAssetsVariables>(GET_OPENSEA_ASSETS, {
-    variables: { ownerAddress: '0x3DC22CB5a37C96d962194c9a0Cd8AFBA7710137C' }
+    // '0x3DC22CB5a37C96d962194c9a0Cd8AFBA7710137C'
+    variables: { ownerAddress: user!.user.address }
   });
 
   const [imageSizes, setImageSizes] = useState<Map<string, ImageSize>>(new Map<string, ImageSize>());

@@ -59,7 +59,7 @@ export function RoomEditTab({ room, onRoomEdit } : RoomEditTabProps) {
               {
                 data && data.getAllBackgroundImages && data.getAllBackgroundImages.data &&
                   data.getAllBackgroundImages.data.map(bgImg => (
-                    <li className="flex-grow-0 flex-shrink-0">
+                    <li key={bgImg.publicId} className="flex-grow-0 flex-shrink-0">
                       <div key={bgImg.publicId} className={classNames(bgImg.url === room.backgroundImage ? 'border-black border-2' : '', "w-8 h-6 grow-0 basis-12 mr-1 cursor-pointer")}
                         onClick={() => {
                           onRoomEdit({ backgroundImage: bgImg.url })

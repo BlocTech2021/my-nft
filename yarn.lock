@@ -2819,7 +2819,7 @@
     "array-includes" "^3.1.4"
     "object.assign" "^4.1.2"
 
-"konva@^8.0.1 || ^7.2.5", "konva@^8.3.5":
+"konva@^8.0.1 || ^7.2.5", "konva@^8.3.5", "konva@8.x":
   "integrity" "sha512-RjaZN8PwZN3n/AlqLmtPNozLRXd6pPo11UawTJpvuOAKEkSQSXI1EHntDRIPnrrJ/j4gU0VmPzWs7/ZgLZnAPQ=="
   "resolved" "https://registry.npmjs.org/konva/-/konva-8.3.5.tgz"
   "version" "8.3.5"
@@ -3579,14 +3579,14 @@
     "hoist-non-react-statics" "^3.0.0"
     "universal-cookie" "^4.0.0"
 
-"react-dom@^16 || ^17 || ^18", "react-dom@^16.8.0 || ^17", "react-dom@^16.8.0-0 || ^17.0.0-0", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@>=16", "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", "react-dom@>=16.8.0", "react-dom@17.0.0":
-  "integrity" "sha512-OGnFbxCjI2TMAZYMVxi4hqheJiN8rCEVVrL7XIGzCB6beNc4Am8M47HtkvxODZw9QgjmAPKpLba9FTu4fC1byA=="
-  "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.0.tgz"
-  "version" "17.0.0"
+"react-dom@^16 || ^17 || ^18", "react-dom@^16.8.0 || ^17", "react-dom@^16.8.0-0 || ^17.0.0-0", "react-dom@^17.0.2", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@>=16", "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", "react-dom@>=16.8.0", "react-dom@17.0.2":
+  "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
+  "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
+  "version" "17.0.2"
   dependencies:
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
-    "scheduler" "^0.20.0"
+    "scheduler" "^0.20.2"
 
 "react-hot-toast@^2.2.0":
   "integrity" "sha512-248rXw13uhf/6TNDVzagX+y7R8J183rp7MwUMNkcrBRyHj/jWOggfXTGlM8zAOuh701WyVW+eUaWG2LeSufX9g=="
@@ -3605,7 +3605,15 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-"react-konva@^17.0.2-6":
+"react-konva-utils@^0.2.0":
+  "integrity" "sha512-xjxhmuZnRJthInyb5wLwdgtO5gQnUvCpEutMoFwQtnwL4s4JFNLTq+fjlmCGhP+TxiJXiztzwinptL+wxP16pg=="
+  "resolved" "https://registry.npmjs.org/react-konva-utils/-/react-konva-utils-0.2.0.tgz"
+  "version" "0.2.0"
+  dependencies:
+    "react-konva" "^17.0.2-4"
+    "use-image" "^1.0.7"
+
+"react-konva@^17.0.2-4", "react-konva@^17.0.2-6":
   "integrity" "sha512-cfRsBKxqAQ6gTBmyrKptKRWhHD+C068dvyqcZ4h8qzKbAacTXQtfLMSpOI+d+ptxSMvayIbbCdbsBmk3bWiClQ=="
   "resolved" "https://registry.npmjs.org/react-konva/-/react-konva-17.0.2-6.tgz"
   "version" "17.0.2-6"
@@ -3628,10 +3636,10 @@
     "object-assign" "^4.1.1"
     "scheduler" "^0.20.2"
 
-"react@*", "react@^16 || ^17 || ^18", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.0-0 || ^17.0.0-0", "react@^17.0.2", "react@^17.0.2 || ^18.0.0-0", "react@>= 16", "react@>= 16.3.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@>=16.8.0", "react@17.0.0":
-  "integrity" "sha512-rG9bqS3LMuetoSUKHN8G3fMNuQOePKDThK6+2yXFWtoeTDLVNh/QCaxT+Jr+rNf4lwNXpx+atdn3Aa0oi8/6eQ=="
-  "resolved" "https://registry.npmjs.org/react/-/react-17.0.0.tgz"
-  "version" "17.0.0"
+"react@*", "react@^16 || ^17 || ^18", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.0-0 || ^17.0.0-0", "react@^17.0.2", "react@^17.0.2 || ^18.0.0-0", "react@>= 16", "react@>= 16.3.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@>=16.8.0", "react@17.0.2":
+  "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
+  "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
+  "version" "17.0.2"
   dependencies:
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
@@ -3768,7 +3776,7 @@
   "resolved" "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz"
   "version" "5.2.1"
 
-"scheduler@^0.20.0", "scheduler@^0.20.2":
+"scheduler@^0.20.2":
   "integrity" "sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ=="
   "resolved" "https://registry.npmjs.org/scheduler/-/scheduler-0.20.2.tgz"
   "version" "0.20.2"
@@ -4356,7 +4364,7 @@
   dependencies:
     "punycode" "^2.1.0"
 
-"use-image@^1.0.10":
+"use-image@^1.0.10", "use-image@^1.0.7":
   "integrity" "sha512-Q+YvP9s5OpYNwrbLFyi9L8LX4o+c59rF12tP2ggwf8RC2Jf+xChhuDVjYO3oZfWgSfdM42ilPIOldjOl+pmb+g=="
   "resolved" "https://registry.npmjs.org/use-image/-/use-image-1.0.10.tgz"
   "version" "1.0.10"

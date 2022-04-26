@@ -9,8 +9,8 @@ export type PhotoFrameProps = {
   isSelected: boolean;
   selectAssetWithId?: Dispatch<SetStateAction<string | undefined>>;
   onAssetEdit?: (assetEdit: AssetEdit) => any;
-  onDragStart?: (photo: Shape<ShapeConfig>) => void;
-  onDragEnd?: (photo: Shape<ShapeConfig>) => void;
+  onDragStart?: (photo: Shape<ShapeConfig>, assetId: string) => void;
+  onDragEnd?: (photo: Shape<ShapeConfig>, assetId: string) => void;
 }
 
 function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragStart, onDragEnd } : PhotoFrameProps) {
@@ -40,18 +40,18 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
             return;
           }
           if(isSelected) {
-            onDragStart(trRef.current)
+            onDragStart(trRef.current, asset.id)
           }
-          onDragStart(e.target as any)
+          onDragStart(e.target as any, asset.id)
         }}
 
         onDragEnd={(e) => {
           if(!onAssetEdit || !onDragEnd) {
             return;
           }
-          onDragEnd(e.target as any)
+          onDragEnd(e.target as any, asset.id)
           if(isSelected) {
-            onDragEnd(trRef.current)
+            onDragEnd(trRef.current, asset.id)
           }
           onAssetEdit({
             id: asset.id,

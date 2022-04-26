@@ -101,7 +101,7 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
           width={width - (spaceWidth?? 0) * 2} height={height - (spaceWidth?? 0) * 2}
           x={spaceWidth?? 0} y={spaceWidth?? 0} />
         
-        <ReactShape sceneFunc={(context, shape) => {
+        {/* <ReactShape sceneFunc={(context, shape) => {
               
               context.beginPath();
               // let gradient = context.createLinearGradient(spaceWidthFixed, spaceWidthFixed, spaceWidthFixed + Math.ceil(width / 11), height - spaceWidthFixed)
@@ -118,11 +118,11 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
             // fill="rgba(255,255,255)"
             fillLinearGradientStartPoint={{ x: spaceWidthFixed, y: spaceWidthFixed  }}
             fillLinearGradientEndPoint={{ x: spaceWidthFixed + Math.ceil(width / 11), y: height - spaceWidthFixed  }}
-            fillLinearGradientColorStops={[0, 'rgba(255,255,255)', 1, 'rgba(100, 100, 100)']}
+            fillLinearGradientColorStops={[0, 'rgba(255,255,255)', 1, 'rgba(255,255,255)']}
             opacity={0.1}
             stroke="rgba(254,254,254)"
-            strokeWidth={0} />
-        {/* <ReactShape sceneFunc={(context, shape) => {
+            strokeWidth={0} /> */}
+        <ReactShape sceneFunc={(context, shape) => {
               const spaceWidthFixed = spaceWidth?? 0;
               context.beginPath();
               context.moveTo(spaceWidthFixed + Math.ceil(width / 3), spaceWidthFixed);
@@ -136,9 +136,9 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
               context.fillStrokeShape(shape);
             }}
             fill="#777777"
-            opacity={0.1}
+            opacity={0.03}
             stroke="rgba(254,254,254)"
-            strokeWidth={0} /> */}
+            strokeWidth={0} />
 
         {
           !!photoFrameUrl &&

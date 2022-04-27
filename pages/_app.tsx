@@ -8,8 +8,6 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { apolloClient } from '../lib/apolloClient';
 import { AuthProvider, useAuth } from '../lib/contexts/auth';
 import { Toaster } from 'react-hot-toast';
-import styles from '../styles/Home.module.css'
-import classNames from 'classnames';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

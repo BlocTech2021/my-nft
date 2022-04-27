@@ -48,7 +48,7 @@ function RoomCanva({ room, editable, onAssetEdit, selectedAssetId, selectAssetWi
   }
 
   return (
-    <div style={backgroundStyle}>
+    <div style={backgroundStyle} className="w-full h-full">
       <Stage width={window.innerWidth} height={window.innerHeight} onClick={() => {
         if(!selectAssetWithId) {
           return;

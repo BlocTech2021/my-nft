@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <CookiesProvider>
         <AuthProvider>
           <Toaster />
-          <div className="relative w-screen h-screen max-w-full max-h-full">
+          <div className="relative w-screen h-screen">
             <Head>
               <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
             </Head>

@@ -80,8 +80,15 @@ function MainRoom(props: MainRoomProps) {
     if (assetIndex < 0) {
       return;
     }
-    setRoom({ ...otherAttrs, assets: [...assets.slice(0, assetIndex),
-      {...assets[assetIndex], ...assetEdit}, ...assets.slice(assetIndex + 1, assets.length)] })
+
+    if (!assetEdit.updatedTime) {
+      setRoom({ ...otherAttrs, assets: [...assets.slice(0, assetIndex),
+        {...assets[assetIndex], ...assetEdit}, ...assets.slice(assetIndex + 1, assets.length)] })
+    } else {
+      // If the updatedTime is set, we move the asset to the last so it appears at the top
+      setRoom({ ...otherAttrs, assets: [...assets.slice(0, assetIndex), ...assets.slice(assetIndex + 1, assets.length),
+        {...assets[assetIndex], ...assetEdit}] })
+    }
 
     setRoomWithAssetsEdit(({ roomEdit, assetsEdit }) => ({ roomEdit, 
       assetsEdit: assetsEdit.set(assetEdit.id, {...assetsEdit.get(assetEdit.id), ...assetEdit}) }))

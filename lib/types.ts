@@ -39,6 +39,7 @@ export type Asset = {
   openseaAssetContract: string;
   openseaImageUrl: string;
   openseaImageThumbnailUrl: string;
+  updatedTime?: number;
 }
 
 export type RoomWithAssetsEdit = {
@@ -63,4 +64,5 @@ export type AssetEdit = {
   strokeWidth?: number;
   strokeColor?: string;
   photoFrameUrl?: string;
+  updatedTime?: number;
 }

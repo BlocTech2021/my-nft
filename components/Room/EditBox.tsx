@@ -64,7 +64,7 @@ export default function EditBox({ room, onAssetCreated, selectedAsset, onAssetEd
                         className={classNames(
                           tab.disabled ? 'hidden' : '',
                           tab.name === currentTabName
-                            ? 'border-white text-pearl font-extrabold'
+                            ? 'border-white text-pearl font-bold'
                             : 'border-transparent text-pearl font-medium',
                           'whitespace-nowrap py-4 px-1 border-b-2 cursor-pointer text-sm'
                         )}

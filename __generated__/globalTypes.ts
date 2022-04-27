@@ -19,6 +19,7 @@ export interface AssetEdit {
   spaceFillColor?: string | null;
   shadow?: number | null;
   photoFrameUrl?: string | null;
+  updatedTime?: number | null;
 }
 
 export interface UpdateRoomInput {

@@ -56,7 +56,8 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
           onAssetEdit({
             id: asset.id,
             x: e.target.x(),
-            y: e.target.y()
+            y: e.target.y(),
+            updatedTime: new Date().getTime(),
           })
         }}
 

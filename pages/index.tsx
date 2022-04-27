@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import styles from '../styles/Home.module.css'
 
 import dynamic from "next/dynamic";
 import { useAuth } from '../lib/contexts/auth';
@@ -18,7 +17,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       <NoSSRComponent></NoSSRComponent>
     </div>
   )

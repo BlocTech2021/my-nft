@@ -8,6 +8,8 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { apolloClient } from '../lib/apolloClient';
 import { AuthProvider, useAuth } from '../lib/contexts/auth';
 import { Toaster } from 'react-hot-toast';
+import styles from '../styles/Home.module.css'
+import classNames from 'classnames';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <CookiesProvider>
         <AuthProvider>
           <Toaster />
-          <div className='relative'>
+          <div className={classNames(styles.container, 'relative')} >
             <Head>
               <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
             </Head>

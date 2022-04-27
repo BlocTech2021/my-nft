@@ -96,7 +96,7 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
         }}>
         <Rect x={0} y={0} width={width} height={height} strokeWidth={strokeWidth} stroke={strokeColor}
           shadowBlur={shadow} shadowEnabled={shadow > 0} fill={spaceFillColor} shadowColor={'black'}
-          shadowOffsetX={8} shadowOffsetY={8} shadowOpacity={0.7} />
+          shadowOffsetX={4} shadowOffsetY={4} shadowOpacity={0.4} />
         <Image image={image}
           width={width - (spaceWidth?? 0) * 2} height={height - (spaceWidth?? 0) * 2}
           x={spaceWidth?? 0} y={spaceWidth?? 0} />

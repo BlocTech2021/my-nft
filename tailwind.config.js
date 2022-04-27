@@ -10,6 +10,9 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      fontSize: {
+        'xxs': '0.6rem'
+      },
       colors: {
         charcoal: '#333333',
         pearl: '#ffffff',

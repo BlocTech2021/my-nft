@@ -71,7 +71,7 @@ export function AssetEditTab({ asset, onAssetEdit, onAssetRemoved }: AssetEditTa
         </label>
         <div className="mt-1 flex rounded-md shadow-sm">
           <div className="rounded-md shadow-xs px-0 py-0 flex overflow-x-auto">
-            <div className={classNames(asset.photoFrameUrl ? 'border-slate-200' : 'border-black', "w-12 h-9 border-2 mr-1 cursor-pointer flex items-center justify-center")}
+            <div className={classNames(asset.photoFrameUrl ? 'border-slate-200' : 'border-black', "w-12 h-9 border-2 ml-1 mr-1 cursor-pointer flex items-center justify-center")}
               onClick={() => {
                 onAssetEdit({ id: asset.id, photoFrameUrl: '' })
               }}> {/** This is for no frame image */}

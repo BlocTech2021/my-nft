@@ -62,10 +62,14 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
         }}
 
         onClick={(e) => {
-          if(!selectAssetWithId) {
+          if(!selectAssetWithId || !onAssetEdit) {
             return;
           }
           selectAssetWithId(asset.id)
+          onAssetEdit({
+            id: asset.id,
+            updatedTime: new Date().getTime(),
+          });
           e.cancelBubble = true;
         }}
 

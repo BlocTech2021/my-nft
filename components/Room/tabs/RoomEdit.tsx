@@ -49,7 +49,7 @@ export function RoomEditTab({ room, onRoomEdit } : RoomEditTabProps) {
           <div className="rounded-md shadow-xs px-0 py-0 container w-full overflow-x-auto">
             <ul className="flex mt-0 mb-0 overflow-x-auto overflow-y-visible">
               <li className="flex-grow-0 flex-shrink-0">
-                <div className={classNames(room.backgroundImage ? 'border-slate-200 border' : 'border-black border-2', "w-8 h-6 grow-0 basis-12  mr-1 cursor-pointer flex items-center justify-center")}
+                <div className={classNames(room.backgroundImage ? 'border-slate-200 border' : 'border-black border-2', "w-8 h-6 grow-0 basis-12 ml-1 mr-1 cursor-pointer flex items-center justify-center")}
                   onClick={() => {
                     onRoomEdit({ backgroundImage: '' })
                   }}> {/** This is for no background image */}

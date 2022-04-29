@@ -12,6 +12,7 @@ import { useAuth } from "../../lib/contexts/auth";
 import { ClipboardCopyIcon, LogoutIcon, SaveIcon } from "@heroicons/react/solid";
 import { BiCopyAlt } from 'react-icons/bi'
 import { FaShare } from "react-icons/fa";
+import ReactTooltip from 'react-tooltip';
 
 const UPDATE_ROOM_MUTATION = gql`
   mutation updateRoom($roomId: String!, 
@@ -158,12 +159,16 @@ function MainRoom(props: MainRoomProps) {
               className="max-w-xl p-1 block w-56 shadow-sm bg text-pearl sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
               value={userRoomUrl}
             />
-            <div className="text-pearl cursor-pointer ml-3 bg p-2 rounded-md"
+            <div data-tip data-for="preview-tooltip" className="text-pearl cursor-pointer ml-3 bg p-2 rounded-md"
               onClick={() => { typeof window !== "undefined" && window.open(userRoomUrl, '_blank')!.focus(); }}>
               <FaShare className="h-5 w-5 text-white" />
             </div>
 
-            <div className="text-pearl cursor-pointer ml-3 bg p-2 rounded-md"
+            <ReactTooltip id='preview-tooltip' effect='solid'>
+              <span>Preview</span>
+            </ReactTooltip>
+
+            <div data-tip data-for="copy-tooltip" className="text-pearl cursor-pointer ml-3 bg p-2 rounded-md"
               onClick={() => { 
                 navigator.clipboard.writeText(userRoomUrl);
                 setShowCopied(true);
@@ -173,6 +178,10 @@ function MainRoom(props: MainRoomProps) {
               }}>
               <BiCopyAlt className="h-5 w-5 text-white sm:max-w-xs sm:text-sm" />
             </div>
+
+            <ReactTooltip id='copy-tooltip' effect='solid'>
+              <span>Copy into clipboard</span>
+            </ReactTooltip>
 
             {
               showCopied &&

@@ -1,10 +1,11 @@
 import { Shape, ShapeConfig } from "konva/lib/Shape";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
-import { Stage, Layer } from "react-konva";
+import { Stage, Layer, Group } from "react-konva";
 import { getColorByName, hexToRgb } from "../../lib/colors/color";
 import { AssetEdit, Room } from "../../lib/types";
 import PhotoFrame from "../PhotoFrame";
 import { Portal } from 'react-konva-utils';
+import { Gif } from '../common/Gif/Gif';
 
 export type RoomCanvaProps = {
   room: Room,

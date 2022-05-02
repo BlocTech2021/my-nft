@@ -40,6 +40,7 @@ export type Asset = {
   openseaImageUrl: string;
   openseaImageThumbnailUrl: string;
   updatedTime?: number;
+  assetType: string;
 }
 
 export type RoomWithAssetsEdit = {

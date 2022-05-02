@@ -24,6 +24,7 @@ export const GET_OPENSEA_ASSETS = gql`
           openseaImagePreviewUrl
           openseaImageOriginalUrl
           openseaImageThumbnailUrl
+          assetType
         }
       }
     }
@@ -34,7 +35,7 @@ const CREATE_ASSET_MUTATION = gql`
   mutation createAsset($roomId: String!, $width: Float!, $height: Float!,
     $openseaId: String!, $openseaName: String, $openseaAssetContract: String!,
     $openseaTokenId: String!, $openseaImageUrl: String!, $openseaImagePreviewUrl: String,
-    $openseaImageThumbnailUrl: String!, $openseaImageOriginalUrl: String) {
+    $openseaImageThumbnailUrl: String!, $openseaImageOriginalUrl: String, $assetType: String!,) {
     createAsset(input: {
       roomId:$roomId,
       width:$width,
@@ -47,6 +48,7 @@ const CREATE_ASSET_MUTATION = gql`
       openseaImagePreviewUrl:$openseaImagePreviewUrl,
       openseaImageThumbnailUrl: $openseaImageThumbnailUrl,
       openseaImageOriginalUrl: $openseaImageOriginalUrl,
+      assetType: $assetType,
     }) {
       ok
       error
@@ -70,6 +72,7 @@ const CREATE_ASSET_MUTATION = gql`
         openseaTokenId
         openseaImageUrl
         openseaImageThumbnailUrl
+        assetType
       }
     }
   }
@@ -150,6 +153,7 @@ export function ItemsSelect({ roomId, onAssetCreated } : ItemsSelectProps) {
                           openseaImagePreviewUrl: asset.openseaImagePreviewUrl,
                           openseaImageThumbnailUrl: asset.openseaImageThumbnailUrl,
                           openseaImageOriginalUrl: asset.openseaImageOriginalUrl,
+                          assetType: asset.assetType,
                         }
                       })
                     }} />  

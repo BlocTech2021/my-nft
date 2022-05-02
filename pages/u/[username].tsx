@@ -36,7 +36,7 @@ const GET_ROOM_OF_USER = gql`
           openseaTokenId
           openseaImageUrl
           openseaImageThumbnailUrl
-          
+          assetType
         }
       }
     }

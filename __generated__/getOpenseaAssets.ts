@@ -17,6 +17,7 @@ export interface getOpenseaAssets_getOpenseaAssets_data_assets {
   openseaImagePreviewUrl: string | null;
   openseaImageOriginalUrl: string | null;
   openseaImageThumbnailUrl: string;
+  assetType: string;
 }
 
 export interface getOpenseaAssets_getOpenseaAssets_data {

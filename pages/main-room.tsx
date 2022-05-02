@@ -41,6 +41,7 @@ const GET_MAIN_ROOM_QUERY = gql`
           openseaTokenId
           openseaImageUrl
           openseaImageThumbnailUrl
+          assetType
         }
       }
     }
@@ -75,6 +76,7 @@ export function transformAsset(assetData: getMainRoom_getMainRoom_data_assets): 
     openseaTokenId,
     openseaImageUrl,
     openseaImageThumbnailUrl,
+    assetType,
   } = assetData;
   
   return {
@@ -96,6 +98,7 @@ export function transformAsset(assetData: getMainRoom_getMainRoom_data_assets): 
     openseaTokenId,
     openseaImageUrl,
     openseaImageThumbnailUrl,
+    assetType
   }
 }
 

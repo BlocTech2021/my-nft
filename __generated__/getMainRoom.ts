@@ -27,6 +27,7 @@ export interface getMainRoom_getMainRoom_data_assets {
   openseaTokenId: string;
   openseaImageUrl: string;
   openseaImageThumbnailUrl: string;
+  assetType: string;
 }
 
 export interface getMainRoom_getMainRoom_data {

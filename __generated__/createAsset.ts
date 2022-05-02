@@ -28,6 +28,7 @@ export interface createAsset_createAsset_data {
   openseaTokenId: string;
   openseaImageUrl: string;
   openseaImageThumbnailUrl: string;
+  assetType: string;
 }
 
 export interface createAsset_createAsset {
@@ -53,4 +54,5 @@ export interface createAssetVariables {
   openseaImagePreviewUrl?: string | null;
   openseaImageThumbnailUrl: string;
   openseaImageOriginalUrl?: string | null;
+  assetType: string;
 }

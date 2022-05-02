@@ -3,6 +3,7 @@ import { Image, Group, Rect, Transformer, Shape as ReactShape } from "react-konv
 import useImage from 'use-image';
 import { Asset, AssetEdit } from "../lib/types";
 import { Shape, ShapeConfig } from "konva/lib/Shape";
+import { Gif } from "./common/Gif/Gif";
 
 export type PhotoFrameProps = {
   asset: Asset;
@@ -102,9 +103,17 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
         <Rect x={0} y={0} width={width} height={height} strokeWidth={strokeWidth} stroke={strokeColor}
           shadowBlur={shadow} shadowEnabled={shadow > 0} fill={spaceFillColor} shadowColor={'black'}
           shadowOffsetX={4} shadowOffsetY={4} shadowOpacity={0.4} />
-        <Image image={image}
-          width={width - (spaceWidth?? 0) * 2} height={height - (spaceWidth?? 0) * 2}
-          x={spaceWidth?? 0} y={spaceWidth?? 0} />
+        
+        {
+          asset.assetType === 'image/gif' ? 
+            <Gif src={openseaImageUrl} width={width - (spaceWidth?? 0) * 2} height={height - (spaceWidth?? 0) * 2}
+              x={spaceWidth?? 0} y={spaceWidth?? 0} /> :
+            <Image image={image}
+              width={width - (spaceWidth?? 0) * 2} height={height - (spaceWidth?? 0) * 2}
+              x={spaceWidth?? 0} y={spaceWidth?? 0} />
+        }
+
+        
         
         {/* <ReactShape sceneFunc={(context, shape) => {
               

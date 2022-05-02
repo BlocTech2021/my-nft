@@ -27,6 +27,7 @@ export interface getRoomOfUser_getRoomOfUser_data_assets {
   openseaTokenId: string;
   openseaImageUrl: string;
   openseaImageThumbnailUrl: string;
+  assetType: string;
 }
 
 export interface getRoomOfUser_getRoomOfUser_data {

@@ -33,6 +33,8 @@ function RoomCanva({ room, editable, onAssetEdit, selectedAssetId, selectAssetWi
     setDraggingAssetId(null);
   }
   
+  const stageDraggable = !editable;
+  const [stageDragging, setStageDragging] = useState<boolean>(false);
 
   if (room.backgroundImage) {
     backgroundStyle = {
@@ -48,14 +50,54 @@ function RoomCanva({ room, editable, onAssetEdit, selectedAssetId, selectAssetWi
     }
   }
 
+
   return (
     <div style={backgroundStyle} className="w-full h-full">
-      <Stage width={window.innerWidth} height={window.innerHeight} onClick={() => {
-        if(!selectAssetWithId) {
-          return;
-        }
-        selectAssetWithId(undefined) 
-      }}>
+      <Stage draggable={stageDraggable} width={window.innerWidth} height={window.innerHeight}
+        onMouseEnter={(e: any) => {
+          if(!stageDraggable) {
+            return;
+          }
+
+          // style stage container:
+          const container = e.target.getStage().container();
+          if(stageDragging) {
+            container.style.cursor = "grabbing";
+          } else {
+            container.style.cursor = "grab";
+          }
+        }}
+        onMouseLeave={(e: any) => {
+          if(!stageDraggable) {
+            return;
+          }
+          const container = e.target.getStage().container();
+          container.style.cursor = "default";
+        }}
+        onMouseDown={(e: any) => {
+          if(!stageDraggable) {
+            return;
+          }
+          console.log('onMouseDown');
+          setStageDragging(true);
+          const container = e.target.getStage().container();
+          container.style.cursor = "grabbing";
+        }}
+        onMouseUp={(e: any) => {
+          if(!stageDraggable) {
+            return;
+          }
+          console.log('onMouseUp');
+          const container = e.target.getStage().container();
+          container.style.cursor = "grab";
+          setStageDragging(false);
+        }}
+        onClick={() => {
+          if(!selectAssetWithId) {
+            return;
+          }
+          selectAssetWithId(undefined) 
+        }}>
         {/* put origin as center of screen */}
         <Layer ref={photosLayer} offsetX={-window.innerWidth / 2} offsetY={-window.innerHeight / 2}>
           

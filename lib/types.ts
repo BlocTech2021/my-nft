@@ -16,6 +16,7 @@ export type Room = {
   backgroundColor?: string;
   backgroundImage?: string;
   userAddress: string;
+  roomIconUrl?: string;
   assets: Asset[];
 }
 
@@ -51,6 +52,7 @@ export type RoomWithAssetsEdit = {
 export type RoomEdit = {
   backgroundColor?: string;
   backgroundImage?: string;
+  roomIconUrl?: string;
 }
 
 export type AssetEdit = {

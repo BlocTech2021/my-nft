@@ -25,6 +25,7 @@ export interface AssetEdit {
 export interface UpdateRoomInput {
   backgroundColor?: string | null;
   backgroundImage?: string | null;
+  roomIconUrl?: string | null;
 }
 
 //==============================================================

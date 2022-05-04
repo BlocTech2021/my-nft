@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Loading from "../../components/common/Loading/Loading";
 import { getRoomOfUser } from "../../__generated__/getRoomOfUser";
 import { transformMainRoom } from "../main-room";
+import Head from 'next/head';
 
 const GET_ROOM_OF_USER = gql`
   query getRoomOfUser($username: String!){
@@ -17,6 +18,7 @@ const GET_ROOM_OF_USER = gql`
         backgroundColor
         backgroundImage
         userAddress
+        roomIconUrl
         assets {
           id
           roomId
@@ -67,7 +69,14 @@ const UserPage: NextPage = () => {
   console.log(`data: ${data!.getRoomOfUser!.data!}`)
 
 
-  return <RoomCanva room={transformMainRoom(data!.getRoomOfUser!.data!)} editable={false} />
+  return (
+    <>
+      <Head>
+        { data!.getRoomOfUser!.data.roomIconUrl && 
+          <link rel="shortcut icon" href={data!.getRoomOfUser!.data!.roomIconUrl} /> }
+      </Head>
+      <RoomCanva room={transformMainRoom(data!.getRoomOfUser!.data!)} editable={false} />
+    </>)
   
 }
 

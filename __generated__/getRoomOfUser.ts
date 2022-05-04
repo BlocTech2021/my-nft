@@ -37,6 +37,7 @@ export interface getRoomOfUser_getRoomOfUser_data {
   backgroundColor: string | null;
   backgroundImage: string | null;
   userAddress: string;
+  roomIconUrl: string | null;
   assets: getRoomOfUser_getRoomOfUser_data_assets[];
 }
 

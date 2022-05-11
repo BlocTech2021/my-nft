@@ -37,6 +37,7 @@ const GET_MAIN_ROOM_QUERY = gql`
           spaceWidth
           shadow
           openseaId
+          openseaName
           openseaAssetContract
           openseaTokenId
           openseaImageUrl
@@ -72,6 +73,7 @@ export function transformAsset(assetData: getMainRoom_getMainRoom_data_assets): 
     spaceFillColor,
     spaceWidth,
     openseaId,
+    openseaName,
     openseaAssetContract,
     openseaTokenId,
     openseaImageUrl,
@@ -94,6 +96,7 @@ export function transformAsset(assetData: getMainRoom_getMainRoom_data_assets): 
     spaceFillColor: spaceFillColor ? spaceFillColor : undefined,
     spaceWidth: spaceWidth ? spaceWidth : undefined,
     openseaId,
+    openseaName: openseaName ? openseaName : undefined,
     openseaAssetContract,
     openseaTokenId,
     openseaImageUrl,

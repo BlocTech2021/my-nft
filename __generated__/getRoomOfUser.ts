@@ -23,6 +23,7 @@ export interface getRoomOfUser_getRoomOfUser_data_assets {
   photoFrameUrl: string | null;
   shadow: number;
   openseaId: string;
+  openseaName: string | null;
   openseaAssetContract: string;
   openseaTokenId: string;
   openseaImageUrl: string;

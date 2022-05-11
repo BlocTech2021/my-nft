@@ -23,6 +23,7 @@ export interface getMainRoom_getMainRoom_data_assets {
   spaceWidth: number | null;
   shadow: number;
   openseaId: string;
+  openseaName: string | null;
   openseaAssetContract: string;
   openseaTokenId: string;
   openseaImageUrl: string;

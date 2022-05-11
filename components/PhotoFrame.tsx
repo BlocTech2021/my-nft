@@ -35,7 +35,7 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
 
   return (
     <>
-      <Group ref={shapeRef} width={width} height={height} x={x} y={y} draggable={!!selectAssetWithId}
+      <Group ref={shapeRef} width={width} height={height} x={x} y={y} draggable={!!onAssetEdit}
         onDragStart={(e) => {
           if(!onDragStart) {
             return;
@@ -63,14 +63,16 @@ function PhotoFrame({ asset, isSelected, selectAssetWithId, onAssetEdit, onDragS
         }}
 
         onClick={(e) => {
-          if(!selectAssetWithId || !onAssetEdit) {
+          if(!selectAssetWithId) {
             return;
           }
           selectAssetWithId(asset.id)
-          onAssetEdit({
-            id: asset.id,
-            updatedTime: new Date().getTime(),
-          });
+          if(onAssetEdit) {
+            onAssetEdit({
+              id: asset.id,
+              updatedTime: new Date().getTime(),
+            });
+          }
           e.cancelBubble = true;
         }}
 

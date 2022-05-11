@@ -6,6 +6,7 @@ import Loading from "../../components/common/Loading/Loading";
 import { getRoomOfUser } from "../../__generated__/getRoomOfUser";
 import { transformMainRoom } from "../main-room";
 import Head from 'next/head';
+import UserViewRoom from "../../components/UserViewRoom";
 
 const GET_ROOM_OF_USER = gql`
   query getRoomOfUser($username: String!){
@@ -34,6 +35,7 @@ const GET_ROOM_OF_USER = gql`
           photoFrameUrl
           shadow
           openseaId
+          openseaName
           openseaAssetContract
           openseaTokenId
           openseaImageUrl
@@ -44,10 +46,6 @@ const GET_ROOM_OF_USER = gql`
     }
   }
 `;
-
-const RoomCanva = dynamic(() => import("../../components/Room/RoomCanva"), {
-  ssr: false,
-});
 
 const UserPage: NextPage = () => {
   const router = useRouter()
@@ -75,7 +73,7 @@ const UserPage: NextPage = () => {
         { data!.getRoomOfUser!.data.roomIconUrl && 
           <link rel="shortcut icon" href={data!.getRoomOfUser!.data!.roomIconUrl} /> }
       </Head>
-      <RoomCanva room={transformMainRoom(data!.getRoomOfUser!.data!)} editable={false} />
+      <UserViewRoom room={transformMainRoom(data!.getRoomOfUser!.data!)} />
     </>)
   
 }

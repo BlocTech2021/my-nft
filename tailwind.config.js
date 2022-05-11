@@ -16,7 +16,9 @@ module.exports = {
       colors: {
         charcoal: '#333333',
         pearl: '#ffffff',
-        granite: '#666666'
+        granite: '#666666',
+        tundora: '#444444',
+        alto: '#dddddd',
       }
     },
   },

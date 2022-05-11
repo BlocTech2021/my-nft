@@ -106,7 +106,7 @@ function RoomCanva({ room, editable, onAssetEdit, selectedAssetId, selectAssetWi
                 <Portal key={asset.id} selector=".drag-layer" enabled={draggingAssetId == asset.id}>
                   <PhotoFrame key={asset.id} asset={asset} 
                     isSelected={asset.id === selectedAssetId}
-                    selectAssetWithId={editable ? selectAssetWithId : undefined}
+                    selectAssetWithId={selectAssetWithId}
                     onAssetEdit={editable ? onAssetEdit : undefined}
                     onDragStart={editable ? onDragStart : undefined}
                     onDragEnd={editable ? onDragEnd : undefined} />

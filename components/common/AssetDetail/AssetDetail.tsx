@@ -86,7 +86,7 @@ function AssetDetail({asset, onClose} : AssetDetailProps) {
                       <img src={asset.openseaImageUrl} />
                     </div>
                     <div>
-                      <div className='text-sm'>Name</div>
+                      <div className='text-sm font-extralight'>Name</div>
                       <div>
                         <div className='text-lg'>{asset.openseaName}</div>
                       </div>
@@ -97,7 +97,7 @@ function AssetDetail({asset, onClose} : AssetDetailProps) {
                         data.getAssetDetail.data.traits && 
                         <div className='grid grid-cols-2 gap-4'>
                           {data.getAssetDetail.data.traits.map(trait => (
-                            <div className='bg-tundora rounded p-2'>
+                            <div key={trait.traitType} className='bg-tundora rounded p-2'>
                               <div className='text-alto text-xs font-extralight'>{trait.traitType}</div>
                               <div>{trait.value}</div>
                             </div>

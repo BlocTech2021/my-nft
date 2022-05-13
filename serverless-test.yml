@@ -1,7 +1,7 @@
-meNftApp-dev:
+meNftApp-test:
   component: "@sls-next/serverless-component@3.7.0"
   inputs:
-    domain: ["dev", "vroom.so"]
+    domain: ["test", "vroom.so"]
     cloudfront:
       certificate:
         cloudFrontDefaultCertificate: false # specify false and one of IAM/ACM certificates

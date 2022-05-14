@@ -131,11 +131,11 @@ function deploy(filename: string): void {
       process.exit(1);
     }
 
-    console.log("Skipping updating lambda because Serverless does it.");
-    execSync(
-      `aws lambda update-function-configuration --function-name ${lambdaName} --runtime nodejs12.x --region us-east-1`,
-      { stdio: "inherit" }
-    );
+    // console.log("Skipping updating lambda because Serverless does it.");
+    // execSync(
+    //   `aws lambda update-function-configuration --function-name ${lambdaName} --runtime nodejs12.x --region us-east-1`,
+    //   { stdio: "inherit" }
+    // );
 
     // Invalidate CloudFront caches if needed
     const cloudFrontId = readCloudFrontId(appName);

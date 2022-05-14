@@ -17,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Toaster />
           <div className="relative w-screen h-screen">
             <Head>
+              <title>VRoom</title>
               <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
             </Head>
             <Component {...pageProps} /> 
